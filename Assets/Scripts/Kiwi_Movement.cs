@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Kiwi_Movement : MonoBehaviour
 {
-    public float speed = 0.0025f;
+    public float speed = 1;
     public float XInput;
     public float YInput;
 
@@ -39,7 +39,7 @@ public class Kiwi_Movement : MonoBehaviour
         float inputY = Input.GetAxis("Vertical");
         YInput = inputY;
 
-        transform.position += new Vector3(speed * inputX, speed * inputY);
+        transform.position += new Vector3(speed * inputX * Time.deltaTime, speed * inputY * Time.deltaTime);
         if (inputY < 0)
         {
             AnimateUp = false;
@@ -62,7 +62,7 @@ public class Kiwi_Movement : MonoBehaviour
             }
             transform.localScale = new Vector3(size, size, size);
         }
-        else if (inputX < 0)
+        if (inputX < 0)
         {
             AnimateDown = false;
             AnimateUp = false;
