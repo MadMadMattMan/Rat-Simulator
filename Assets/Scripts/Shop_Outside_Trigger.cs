@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Shop_Outside_Trigger : MonoBehaviour
 {
+    public Transform IKEASPAWN;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Enter Shop Scene       
+        if (collision.name == "Player")
+        {
+            collision.GetComponent<Transform>().position = IKEASPAWN.position;
+        }       
     }
 }
