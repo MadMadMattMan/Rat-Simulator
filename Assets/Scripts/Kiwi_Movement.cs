@@ -9,28 +9,9 @@ public class Kiwi_Movement : MonoBehaviour
     public float XInput;
     public float YInput;
 
-    private Rigidbody2D rb;
+    public Animator PlayerMovement;
 
     public float size;
-    public Sprite KiwiDown0;
-    public Sprite KiwiDown1;
-    public Sprite KiwiDown2;
-    public Sprite KiwiUp0;
-    public Sprite KiwiUp1;
-    public Sprite KiwiUp2;
-    public Sprite KiwiSide0;
-    public Sprite KiwiSide1;
-    public Sprite KiwiSide2;
-
-    private bool AnimateUp;
-    private bool AnimateDown;
-    private bool AnimateSide;
-    public float AnimationSpeed;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
 
     void Update()
     {
@@ -38,90 +19,28 @@ public class Kiwi_Movement : MonoBehaviour
         XInput = inputX;
         float inputY = Input.GetAxis("Vertical");
         YInput = inputY;
-
-        transform.position += new Vector3(speed * inputX * Time.deltaTime, speed * inputY * Time.deltaTime);
-        if (inputY < 0)
+        int Sprint;
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            AnimateUp = false;
-            AnimateSide = false;
-            if (!AnimateDown)
-            {
-                StartCoroutine(DownAniation());
-                AnimateDown = true;
-            }
-            transform.localScale = new Vector3(size, size, size);
+            Sprint = 5;
         }
-        else if (inputY > 0)
+        else
         {
-            AnimateDown = false;
-            AnimateSide = false;
-            if (!AnimateUp)
-            {
-                StartCoroutine(UpAniation());
-                AnimateUp = true;
-            }
-            transform.localScale = new Vector3(size, size, size);
+            Sprint = 1;
         }
+        transform.position += new Vector3(speed * inputX * Time.deltaTime * Sprint, speed * inputY * Time.deltaTime * Sprint);
         if (inputX < 0)
         {
-            AnimateDown = false;
-            AnimateUp = false;
-            if (!AnimateSide)
-            {
-                StartCoroutine(SideAniation());
-                AnimateSide = true;
-            }
             transform.localScale = new Vector3(-size, size, size);
         }
-        else if (inputX > 0)
+        else
         {
-            AnimateDown = false;
-            AnimateUp = false;
-            if (!AnimateSide)
-            {
-                StartCoroutine(DownAniation());
-                AnimateSide = true;
-            }
             transform.localScale = new Vector3(size, size, size);
         }
 
+        if (inputX != 0 && inputY > 0)
+        {
 
-    }
-
-    public IEnumerator UpAniation()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiUp0;
-        yield return new WaitForSeconds(AnimationSpeed);
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiUp1;
-        yield return new WaitForSeconds(AnimationSpeed);
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiUp0;
-        yield return new WaitForSeconds(AnimationSpeed);
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiUp2;
-        yield return new WaitForSeconds(AnimationSpeed);
-        AnimateUp = false;
-    }
-    public IEnumerator DownAniation()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiDown0;
-        yield return new WaitForSeconds(AnimationSpeed);
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiDown1;
-        yield return new WaitForSeconds(AnimationSpeed);
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiDown0;
-        yield return new WaitForSeconds(AnimationSpeed);
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiDown2;
-        yield return new WaitForSeconds(AnimationSpeed);
-        AnimateDown = false;
-    }
-    public IEnumerator SideAniation()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiSide0;
-        yield return new WaitForSeconds(AnimationSpeed);
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiSide1;
-        yield return new WaitForSeconds(AnimationSpeed);
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiSide0;
-        yield return new WaitForSeconds(AnimationSpeed);
-        gameObject.GetComponent<SpriteRenderer>().sprite = KiwiSide2;
-        yield return new WaitForSeconds(AnimationSpeed);
-        AnimateSide = false;
+        }
     }
 }

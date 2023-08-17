@@ -315,6 +315,7 @@ namespace GreatArcStudios
             if (Input.GetKeyDown(KeyCode.Escape) && GamePaused == false)
             {
                 GamePaused = true;
+                mainPanel.SetActive(true);
                 audioPanel.SetActive(false);
                 TitleTexts.SetActive(true);
                 mask.SetActive(true);
