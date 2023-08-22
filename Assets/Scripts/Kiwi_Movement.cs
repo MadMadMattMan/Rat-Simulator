@@ -38,9 +38,22 @@ public class Kiwi_Movement : MonoBehaviour
             transform.localScale = new Vector3(size, size, size);
         }
 
-        if (inputX != 0 && inputY > 0)
+        if (inputX != 0 && inputY > 0.25f)
         {
+            PlayerMovement.SetBool("MovingUpDiag", true);
+        }
+        else if (PlayerMovement.GetBool("MovingUpDiag"))
+        {
+            PlayerMovement.SetBool("MovingUpDiag", false);
+        }
 
+        if (inputX != 0 && inputY > -0.25f)
+        {
+            PlayerMovement.SetBool("MovingDownDiag", true);
+        }
+        else if (PlayerMovement.GetBool("MovingDownDiag"))
+        {
+            PlayerMovement.SetBool("MovingDownDiag", false);
         }
     }
 }
