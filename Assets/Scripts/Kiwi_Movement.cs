@@ -9,6 +9,7 @@ public class Kiwi_Movement : MonoBehaviour
     public float XInput;
     public float YInput;
 
+    public Transform KiwiLight;
     public Animator PlayerMovement;
 
     public float size;
@@ -32,10 +33,12 @@ public class Kiwi_Movement : MonoBehaviour
         if (inputX < 0)
         {
             transform.localScale = new Vector3(-size, size, size);
+            KiwiLight.rotation = new Quaternion(0, 0, -90, 0);
         }
         else
         {
             transform.localScale = new Vector3(size, size, size);
+            KiwiLight.rotation = new Quaternion(0, 0, -90, 0);
         }
 
         if (inputX != 0 && inputY > 0.25f)
