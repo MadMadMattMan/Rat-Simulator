@@ -6,8 +6,11 @@ using UnityEngine;
 public class Kiwi_Movement : MonoBehaviour
 {
     public float speed = 1;
-    public float XInput;
-    public float YInput;
+    public string AniState;
+    public string BeforeUpdate;
+
+    public float InputX;
+    public float InputY;
 
     public Transform KiwiLight;
     public Animator PlayerMovement;
@@ -21,8 +24,13 @@ public class Kiwi_Movement : MonoBehaviour
     {
         //takes the input from the player, (wasd, arrow keys or controller) and turns it into a float between -1 and 1 and stores that value as a varibale (either inputX or inputY) so it can be referanced later
         float inputX = Input.GetAxis("Horizontal");
+        InputX = inputX;
         float inputY = Input.GetAxis("Vertical");
+        InputY = inputY;
+
         int Sprint = 1;
+
+        BeforeUpdate = AniState;
 
 
         //sprint mechanic if shift is held
@@ -39,20 +47,28 @@ public class Kiwi_Movement : MonoBehaviour
         if (inputX > 0 && inputY < 0.25f && inputY > -0.25f)
         {
             PlayerMovement.SetTrigger("MoveSideL");
+            AniState = "MoveSideL";
+            KiwiLight.rotation = KiwiLightPos[6].rotation;
         }
         else if (inputX < 0 && inputY < 0.25f && inputY > -0.25f)
         {
             PlayerMovement.SetTrigger("MoveSideR");
+            AniState = "MoveSideR";
+            KiwiLight.rotation = KiwiLightPos[2].rotation;
         }
 
         //if the player moves the joystick along the y axis, the respective vertical animation will play
         if (inputY > 0 && inputX < 0.25f && inputX > -0.25f)
         {
             PlayerMovement.SetTrigger("MoveUp");
+            AniState = "MoveUp";
+            KiwiLight.rotation = KiwiLightPos[0].rotation;
         }
         else if (inputY < 0 && inputX < 0.25f && inputX > -0.2f)
         {
-            PlayerMovement.SetTrigger("MoveDown");  
+            PlayerMovement.SetTrigger("MoveDown");
+            AniState = "MoveDown";
+            KiwiLight.rotation = KiwiLightPos[4].rotation;
         }
 
 
@@ -62,24 +78,39 @@ public class Kiwi_Movement : MonoBehaviour
         if (inputX > 0.25f && inputY > 0.25f)
         {
             PlayerMovement.SetTrigger("MoveUpDiagR");
+            AniState = "MoveUpDiagR";
+            KiwiLight.rotation = KiwiLightPos[1].rotation;
         }
         else if (inputX > 0.25f && inputY < 0.25f)
         {
             PlayerMovement.SetTrigger("MoveDownDiagR");
+            AniState = "MoveDownDiagR";
+            KiwiLight.rotation = KiwiLightPos[3].rotation;
         }
         else if (inputX < 0.25f && inputY > 0.25f)
         {
             PlayerMovement.SetTrigger("MoveUpDiagL");
+            AniState = "MoveUpDiagL";
+            KiwiLight.rotation = KiwiLightPos[7].rotation;
         }
         else if (inputX < 0.25f && inputY < 0.25f)
         {
             PlayerMovement.SetTrigger("MoveDownDiagL");
+            AniState = "MoveDownDiagL";
+            KiwiLight.rotation = KiwiLightPos[5].rotation;
         }
 
         //if the player stops, it will trigger an idle animation
         if (inputX > -0.15f && inputX < 0.15f && inputY > -0.15f && inputY < 0.15f)
         {
             PlayerMovement.SetTrigger("NoInput");
+            AniState = "idle";
+        }
+
+        if (AniState != BeforeUpdate)
+        {
+            PlayerMovement.SetTrigger("NoInput");
+            AniState = "idle";
         }
     }
 }
