@@ -46,13 +46,13 @@ public class Kiwi_Movement : MonoBehaviour
         //if the player moves the joystick along the x axis, the respective horizontal animation will play
         if (inputX > 0 && inputY < 0.25f && inputY > -0.25f)
         {
-            PlayerMovement.SetTrigger("MoveSideL");
+            PlayerMovement.SetTrigger("MoveSideR");
             Rotation = KiwiLightPos[2];
             KiwiLight.rotation = KiwiLightPos[2].rotation;
         }
         else if (inputX < 0 && inputY < 0.25f && inputY > -0.25f)
         {
-            PlayerMovement.SetTrigger("MoveSideR");
+            PlayerMovement.SetTrigger("MoveSideL");
             Rotation = KiwiLightPos[6];
             KiwiLight.rotation = KiwiLightPos[6].rotation;
         }

@@ -1022,7 +1022,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 52a3b3c71817dde42b7d25f2c4e2d4a1, type: 2}
+  m_Motion: {fileID: 7400000, guid: 272c35b06b5380c4d934eaa30918b182, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1261,6 +1261,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -2758470669290065178}
     m_Position: {x: -140, y: -40, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 5181222977731095115}
+    m_Position: {x: -105, y: 25, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1872,6 +1875,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &5181222977731095115
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: KiwiDiagDownL
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: c23ba9ec12e220b4e8a54ecbe43b32d2, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &5297773095574026225
 AnimatorState:
   serializedVersion: 6
@@ -2035,7 +2064,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 9d0678ab14c812d459821a3c05412664, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
