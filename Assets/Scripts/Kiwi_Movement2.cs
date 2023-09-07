@@ -38,6 +38,7 @@ public class Kiwi_Movement2 : MonoBehaviour
         //actually moves the player by timesing the speed variable with the Input.GetAxis (number between -1 and 1) with Time.delta time to normalise the speed between computers with a sprint vaiable to increse the speed if left shift is held down
         transform.position += new Vector3(speed * InputX * Time.deltaTime * Sprint, speed * InputY * Time.deltaTime * Sprint);
 
+
         //Sets light roation, the variable for roation sector and the current state of the player (moving or idle) and stores the variables
         ///Vertical and Horizontal
         ////If the players movement x and y axis are between some certain parameters, it will give one of 8 movement directions including a dead zone for stick drift
@@ -54,7 +55,7 @@ public class Kiwi_Movement2 : MonoBehaviour
             State = "moving";
         }
 
-        ///Diagonals
+        ///Diagonals 
         if (InputY > 0 && InputX < 0.25f && InputX > -0.25f)
         {
             CurrentRotation = KiwiLightPos[0];
@@ -91,17 +92,31 @@ public class Kiwi_Movement2 : MonoBehaviour
             KiwiLight.rotation = KiwiLightPos[5].rotation;
             State = "moving";
         }
+
         ///if the player stops, it will set the current stae of the player to idle which will be used later in animating the kiwi
         if (InputX > -0.15f && InputX < 0.15f && InputY > -0.15f && InputY < 0.15f)
         {
             State = "idle";
         }
 
-
         //Animations
         if (State == "moving")
         {
+            if (CurrentRotation == KiwiLightPos[0])
+            {
 
+            }
+        }
+        else if (State == "idle")
+        {
+            if (CurrentRotation == KiwiLightPos[0])
+            {
+
+            }
+        }
+        else
+        {
+            Debug.LogError("Invalid Movement Animation State");
         }
 
 
