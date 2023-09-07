@@ -11,6 +11,7 @@ public class Kiwi_Movement2 : MonoBehaviour
     public float InputY;
     public Transform CurrentRotation;
     public string State = "idle";
+    public string Animation;
 
     public Transform KiwiLight;
     public Animator PlayerMovement;
@@ -97,6 +98,11 @@ public class Kiwi_Movement2 : MonoBehaviour
         }
 
 
+        //Animations
+        if (State == "moving")
+        {
+
+        }
 
 
     }
