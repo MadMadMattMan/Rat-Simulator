@@ -1,22 +1,21 @@
-﻿/*
- *  Author: ariel oliveira [o.arielg@gmail.com]
- */
-
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class HeartSystemManager : MonoBehaviour
 {
     public delegate void OnHealthChangedDelegate();
     public OnHealthChangedDelegate onHealthChangedCallback;
 
     #region Sigleton
-    private static PlayerStats instance;
-    public static PlayerStats Instance
+    private static HeartSystemManager instance;
+    public static HeartSystemManager Instance
     {
         get
         {
             if (instance == null)
-                instance = FindObjectOfType<PlayerStats>();
+                instance = FindObjectOfType<HeartSystemManager>();
             return instance;
         }
     }

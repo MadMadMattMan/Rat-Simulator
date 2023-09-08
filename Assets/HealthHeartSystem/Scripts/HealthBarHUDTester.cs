@@ -1,23 +1,22 @@
-﻿/*
- *  Author: ariel oliveira [o.arielg@gmail.com]
- */
-
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class HealthBarHUDTester : MonoBehaviour
 {
     public void AddHealth()
     {
-        PlayerStats.Instance.AddHealth();
+        HeartSystemManager.Instance.AddHealth();
     }
 
     public void Heal(float health)
     {
-        PlayerStats.Instance.Heal(health);
+        HeartSystemManager.Instance.Heal(health);
     }
 
     public void Hurt(float dmg)
     {
-        PlayerStats.Instance.TakeDamage(dmg);
+        HeartSystemManager.Instance.TakeDamage(1);
     }
 }
