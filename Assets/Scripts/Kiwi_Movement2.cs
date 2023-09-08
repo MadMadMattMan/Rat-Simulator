@@ -102,20 +102,29 @@ public class Kiwi_Movement2 : MonoBehaviour
         //Animations
         if (State == "moving")
         {
-            if (CurrentRotation == KiwiLightPos[0])
-            {
-
-            }
+            if (CurrentRotation == KiwiLightPos[0]) { PlayerMovement.SetBool("Up", true);    }
+            if (CurrentRotation == KiwiLightPos[1]) { PlayerMovement.SetBool("UpR", true);   }
+            if (CurrentRotation == KiwiLightPos[2]) { PlayerMovement.SetBool("SideR", true); }
+            if (CurrentRotation == KiwiLightPos[3]) { PlayerMovement.SetBool("DownR", true); }
+            if (CurrentRotation == KiwiLightPos[4]) { PlayerMovement.SetBool("Down", true);  }
+            if (CurrentRotation == KiwiLightPos[5]) { PlayerMovement.SetBool("DownL", true); }
+            if (CurrentRotation == KiwiLightPos[6]) { PlayerMovement.SetBool("SideL", true); }
+            if (CurrentRotation == KiwiLightPos[7]) { PlayerMovement.SetBool("UpL", true);   }
         }
         else if (State == "idle")
         {
-            if (CurrentRotation == KiwiLightPos[0])
-            {
-
-            }
+            PlayerMovement.SetBool("Up", false); 
+            PlayerMovement.SetBool("UpR", false); 
+            PlayerMovement.SetBool("SideR", false); 
+            PlayerMovement.SetBool("DownR", false); 
+            PlayerMovement.SetBool("Down", false); 
+            PlayerMovement.SetBool("DownL", false); 
+            PlayerMovement.SetBool("SideL", false);
+            PlayerMovement.SetBool("UpL", false);  
         }
         else
         {
+            //displays a red error code in the console of the issue
             Debug.LogError("Invalid Movement Animation State");
         }
 
