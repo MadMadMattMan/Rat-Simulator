@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,7 +115,196 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: evil_rat-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 58
+        width: 56
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7b80e0a8aba97943a9c7e719e633220
+      internalID: -836734335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: evil_rat-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 58
+        width: 56
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 859051dd6a669674e894ba2338536719
+      internalID: 296266155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: evil_rat-removebg-preview_4
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 53
+        width: 54
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9587b3ac998e25042830edf946bbff65
+      internalID: 761405938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: evil_rat-removebg-preview_5
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 52
+        width: 56
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 537f6211ee6c7824998fa2e1894186d7
+      internalID: -69163430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: evil_rat-removebg-preview_6
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 53
+        width: 55
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5cc125d4438c264b8aa2b666efb41bd
+      internalID: -1894337349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: evil_rat-removebg-preview_7
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 69
+        width: 140
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 565849ead0eebf44494708e74b5b3dd7
+      internalID: -1099515204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: evil_rat-removebg-preview_8
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 70
+        width: 162
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa086683880ce554cbfd6c72f4ac3e03
+      internalID: 1476974153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: evil_rat-removebg-preview_9
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 0
+        width: 43
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca77337c002c44d4ea74bcb8ef95f808
+      internalID: 394473540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: evil_rat-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 162
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb50be4ca9b8ce04a83cbf12241ee5bf
+      internalID: -1885577463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +315,18 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      evil_rat-removebg-preview_0: -1885577463
+      evil_rat-removebg-preview_8: 1476974153
+      evil_rat-removebg-preview_6: -1894337349
+      evil_rat-removebg-preview_3: 296266155
+      evil_rat-removebg-preview_7: -1099515204
+      evil_rat-removebg-preview_1: -1025765285
+      evil_rat-removebg-preview_10: 1289051412
+      evil_rat-removebg-preview_2: -836734335
+      evil_rat-removebg-preview_9: 394473540
+      evil_rat-removebg-preview_4: 761405938
+      evil_rat-removebg-preview_5: -69163430
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
