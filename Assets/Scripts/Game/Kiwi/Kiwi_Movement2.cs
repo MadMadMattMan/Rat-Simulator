@@ -21,7 +21,7 @@ public class Kiwi_Movement2 : MonoBehaviour
     //an array of different transform positions for the light as we don't understand how to set transform.roation just yet
     public Transform[] KiwiLightPos = new Transform[5];
 
-    void Update()
+    void FixedUpdate()
     {
         //takes the input from the player, (wasd, arrow keys or controller) and turns it into a float between -1 and 1 and stores that value as a varibale (either inputX or inputY) so it can be referanced later
         InputX = Input.GetAxis("Horizontal");
@@ -40,6 +40,7 @@ public class Kiwi_Movement2 : MonoBehaviour
 
 
         //Sets light roation, the variable for roation sector and the current state of the player (moving or idle) and stores the variables
+
         ///Vertical and Horizontal
         ////If the players movement x and y axis are between some certain parameters, it will give one of 8 movement directions including a dead zone for stick drift
         if (InputX > 0 && InputY < 0.25f && InputY > -0.25f)
@@ -129,6 +130,6 @@ public class Kiwi_Movement2 : MonoBehaviour
             Debug.LogError("Invalid Movement Animation State");
         }
 
-
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, size);
     }
 }
