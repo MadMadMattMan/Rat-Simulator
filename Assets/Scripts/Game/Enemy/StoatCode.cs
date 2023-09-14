@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class StoatCode : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class StoatCode : MonoBehaviour
 
     public string StoatState;
 
+    public Button DamageButton;
 
     private void Update()
     {
@@ -26,31 +28,12 @@ public class StoatCode : MonoBehaviour
     {
         if (triggerobject.name == "Player")
         {
-            StoatState = "Active";
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D triggerobject)
-    {
-        if (triggerobject.name == "Player")
-        {
-            StoatState = "Idle";
-        }
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        StartCoroutine(StoatStateMovement());
-    }
-
-    public IEnumerator StoatStateMovement()
-    {
-        while (StoatState == "Active")
-        {
             transform.position -= DistanceToPlayer.normalized * Time.deltaTime * StoatSpeed;
         }
+    }
 
-        return null;
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 }

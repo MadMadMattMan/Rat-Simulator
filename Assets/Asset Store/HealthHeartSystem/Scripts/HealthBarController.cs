@@ -14,7 +14,6 @@ public class HealthBarController : MonoBehaviour
 
     private void Start()
     {
-        // Should I use lists? Maybe :)
         heartContainers = new GameObject[(int)HeartSystemManager.Instance.MaxTotalHealth];
         heartFills = new Image[(int)HeartSystemManager.Instance.MaxTotalHealth];
 
