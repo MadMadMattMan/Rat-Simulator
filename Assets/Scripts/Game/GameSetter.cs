@@ -12,12 +12,8 @@ public class GameSetter : MonoBehaviour
 
     private void Awake()
     {
+        HeartSystemManager.GameStateMaster = true;
         GlobalLight.GetComponent<Light2D>().intensity = GlobalLightIntensity;
         TimeScale = 1;
-    }
-
-    private void Update()
-    {
-        Time.timeScale = TimeScale;
     }
 }

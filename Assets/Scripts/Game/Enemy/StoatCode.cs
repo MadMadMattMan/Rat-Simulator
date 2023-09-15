@@ -16,28 +16,39 @@ public class StoatCode : MonoBehaviour
 
     public Vector3 DistanceToPlayer;
 
-    public string StoatState;
-
-    public Button DamageButton;
+    public string StoatState; //idle, chase, pounce
+    public float AttackPauseTime;
 
     private void Update()
     {
         DistanceToPlayer = transform.position - Player.position;
-    }
-
-    private void OnTriggerStay2D(Collider2D triggerobject)
-    {
-        if (triggerobject.name == "Player")
+        if (StoatState == "chase")
         {
             transform.position -= DistanceToPlayer.normalized * Time.deltaTime * StoatSpeed;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D triggerobject)
+    {
+        if (triggerobject.name == "Player")
+        {
+            StoatState = "chase";
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Player")
         {
-            //Take Damage
+            HeartSystemManager.health -= 1;
+            StartCoroutine(AttackPause());
         }
+    }
+
+    private IEnumerator AttackPause()
+    {
+        StoatState = "idle";
+        yield return new WaitForSecondsRealtime(AttackPauseTime);
+        StoatState = "chase";
     }
 }

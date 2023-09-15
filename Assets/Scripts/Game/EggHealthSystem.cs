@@ -25,8 +25,16 @@ public class EggHealthSystem : MonoBehaviour
 		UpdateGraphics();
 	}
 
-	//Updates helath bar and text
-	private void UpdateHealthBar()
+    private void Update()
+    {
+        if (RatCode.AttackState && Time.timeScale == 1)
+		{
+			Attacked(0.005f);
+		}
+    }
+
+    //Updates helath bar and text
+    private void UpdateHealthBar()
 	{
 		float healthpercent = hitPoint / 100;
 		currentHealthBar.rectTransform.localPosition = new Vector3(currentHealthBar.rectTransform.rect.width * healthpercent - currentHealthBar.rectTransform.rect.width, 0, 0);
@@ -34,7 +42,7 @@ public class EggHealthSystem : MonoBehaviour
 	}
 
 
-	public void TakeDamage(float Damage)
+	public void Attacked(float Damage)
 	{
 		hitPoint -= Damage;
 		if (hitPoint < 1)
@@ -42,20 +50,14 @@ public class EggHealthSystem : MonoBehaviour
 
 		UpdateGraphics();
 
-		StartCoroutine(PlayerHurts());
+		StartCoroutine(TakeDamage());
 	}
 
-	public void HealDamage(float Heal)
+	public void Healer(float Heal)
 	{
 		hitPoint += Heal;
 		if (hitPoint > maxHitPoint) 
 			hitPoint = maxHitPoint;
-
-		UpdateGraphics();
-	}
-	public void SetMaxHealth(float max)
-	{
-		maxHitPoint += (int)(maxHitPoint * max / 100);
 
 		UpdateGraphics();
 	}
@@ -65,11 +67,8 @@ public class EggHealthSystem : MonoBehaviour
 	}
 
 	// Coroutine of what happens when the egg gets hurt
-	IEnumerator PlayerHurts()
+	IEnumerator TakeDamage()
 	{
-		// Player gets hurt. Do stuff.. play anim, sound..
-
-		//When players health is zero, player is dead
 		if (hitPoint <= 0)
 		{
 			yield return StartCoroutine(PlayerDied());
@@ -79,15 +78,13 @@ public class EggHealthSystem : MonoBehaviour
 		{
 			yield return null;
 		}
-
-        Debug.Log("Egg Hurt");
     }
 
 	// Coroutine of what happens when the egg dies
 	IEnumerator PlayerDied()
 	{
-		// Player is dead. Do stuff.. play anim, sound..
-		Debug.Log("Egg died");
+		Debug.Log("Egg died - Game Over");
+		HeartSystemManager.GameStateMaster = false;
 
 		yield return null;
 	}

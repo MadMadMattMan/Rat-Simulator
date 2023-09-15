@@ -21,8 +21,10 @@ public class HeartSystemManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    private float health;
+    public static bool GameStateMaster;
+    public static float health;
+    public float currenthealth;
+
     [SerializeField]
     private float maxHealth;
     [SerializeField]
@@ -32,9 +34,9 @@ public class HeartSystemManager : MonoBehaviour
     public float MaxHealth { get { return maxHealth; } }
     public float MaxTotalHealth { get { return maxTotalHealth; } }
 
-    public void Heal(float health)
+    public void Heal(float healed)
     {
-        this.health += health;
+        health += healed;
         ClampHealth();
     }
 
@@ -42,6 +44,28 @@ public class HeartSystemManager : MonoBehaviour
     {
         health -= dmg;
         ClampHealth();
+    }
+
+    public void Start()
+    {
+        health = 3;
+        currenthealth = 3;
+    }
+
+
+    public void FixedUpdate()
+    {
+        if (currenthealth != health)
+        {
+            ClampHealth();
+        }
+        currenthealth = health;
+
+        if (health == 0)
+        {
+            Debug.Log("Game over");
+            GameStateMaster = false;
+        }
     }
 
     public void AddHealth()

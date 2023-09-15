@@ -8,9 +8,15 @@ public class RatCode : MonoBehaviour
 
     public Vector3 DistanceToPlayer;
 
+    public static bool AttackState = true;
+
 
     private void Update()
     {
         DistanceToPlayer = transform.position - Player.position;
+        for (int i = 0; i < DistanceToPlayer.magnitude; i++)
+        {
+            //Distance check
+        }
     }
 }
