@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Title_Script : MonoBehaviour
 {
+    public void Awake()
+    {
+        Time.timeScale = 1.0f;
+    }
 
     public void StartGame()
     {

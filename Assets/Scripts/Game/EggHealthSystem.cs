@@ -20,7 +20,7 @@ public class EggHealthSystem : MonoBehaviour
 	public float maxHitPoint = 100f;
 	
 	//Sets UI Graphic to correct values at start of game
-  	void Start()
+  	void Awake()
 	{
 		UpdateGraphics();
 	}

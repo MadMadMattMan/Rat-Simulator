@@ -12,8 +12,6 @@ public class StoatCode : MonoBehaviour
     public float StoatChase = 0.75f;
     public float StoatSprint = 0.95f;
 
-    public float StoatSpeed;
-
     public Vector3 DistanceToPlayer;
 
     public string StoatState; //idle, chase, pounce
@@ -24,7 +22,7 @@ public class StoatCode : MonoBehaviour
         DistanceToPlayer = transform.position - Player.position;
         if (StoatState == "chase")
         {
-            transform.position -= DistanceToPlayer.normalized * Time.deltaTime * StoatSpeed;
+            transform.position -= DistanceToPlayer.normalized * Time.deltaTime * StoatChase;
         }
     }
 
@@ -33,6 +31,14 @@ public class StoatCode : MonoBehaviour
         if (triggerobject.name == "Player")
         {
             StoatState = "chase";
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D triggerobject)
+    {
+        if (triggerobject.name == "Player")
+        {
+            StoatState = "idle";
         }
     }
 

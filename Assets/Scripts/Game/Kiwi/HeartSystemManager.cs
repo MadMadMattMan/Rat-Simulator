@@ -46,7 +46,7 @@ public class HeartSystemManager : MonoBehaviour
         ClampHealth();
     }
 
-    public void Start()
+    public void Awake()
     {
         health = 3;
         currenthealth = 3;

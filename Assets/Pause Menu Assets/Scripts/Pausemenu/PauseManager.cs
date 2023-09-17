@@ -57,6 +57,7 @@ namespace GreatArcStudios
         /// Main menu level string used for loading the main menu. This means you'll need to type in the editor text box, the name of the main menu level, ie: "mainmenu";
         /// </summary>
         public String mainMenu;
+        public String gameScene;
         //DOF script name
         /// <summary>
         /// The Depth of Field script name, ie: "DepthOfField". You can leave this blank in the editor, but will throw a null refrence exception, which is harmless.
@@ -278,7 +279,7 @@ namespace GreatArcStudios
         /// <summary>
         /// The start method; you will need to place all of your inital value getting/setting here. 
         /// </summary>
-        public void Start()
+        public void Awake()
         {
            
             readUseSimpleTerrain = useSimpleTerrain;
@@ -334,18 +335,6 @@ namespace GreatArcStudios
             lastTexLimit = QualitySettings.masterTextureLimit;
             //set last shadow cascade 
             lastShadowCascade = QualitySettings.shadowCascades;
-            saveSettings.LoadGameSettings(File.ReadAllText(Application.persistentDataPath + "/" + saveSettings.fileName));
-            try
-            {
-                densityINI = Terrain.activeTerrain.detailObjectDensity;
-            }
-            catch
-            {
-                if (terrain = null)
-                {
-                    Debug.Log("Terrain Not Assigned");
-                }
-            }
 
             //set the blur boolean to false;
             //blurBool = false;
@@ -361,7 +350,8 @@ namespace GreatArcStudios
         /// </summary>
         public void Restart()
         {
-            SceneManager.LoadScene(_currentLevel);
+            SceneManager.LoadScene("Game Scene");
+            Time.timeScale = 1.0f;
             uiEventSystem.firstSelectedGameObject = defualtSelectedMain;
         }
         /// <summary>
@@ -423,7 +413,8 @@ namespace GreatArcStudios
         /// </summary>
         public void returnToMenu()
         {
-            SceneManager.LoadScene(mainMenu);
+            SceneManager.LoadScene("Title Scene");
+            Time.timeScale = 1.0f;
             uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
         }
 
@@ -976,19 +967,6 @@ namespace GreatArcStudios
             {
                 terrain.treeMaximumFullLODCount = (int)qual;
             }
-
-        }
-        /// <summary>
-        /// Change the height map max LOD using 
-        /// <c>
-        /// terrain.heightmapMaximumLOD = (int)qual;
-        /// </c>
-        /// </summary>
-        /// <param name="qual"></param>
-        public void updateTerrainLod(float qual)
-        {
-            try { if (useSimpleTerrain == true) { simpleTerrain.heightmapMaximumLOD = (int)qual; } else { terrain.heightmapMaximumLOD = (int)qual; } }
-            catch { Debug.Log("Terrain not assigned"); return; }
 
         }
         /// <summary>
