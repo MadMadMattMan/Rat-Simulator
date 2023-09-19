@@ -99,11 +99,11 @@ public class StoatCode : MonoBehaviour
             StartCoroutine(AttackPause());
         }
     }
-
+    //Coroutine that disingades the stoat from the player when it hits the player to prevent the stoat sticking to or pushing the player
     private IEnumerator AttackPause()
     {
         StoatState = "idle";
-        yield return new WaitForSecondsRealtime(AttackPauseTime);
+        yield return new WaitForSecondsRealtime(AttackPauseTime); //makes the stoat wait for the AttackPauseTime variable in seconds
         StoatState = "chase";
     }
 }
