@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public static int[] inventory = new int[1];
-    public int[] inventoryDebug = new int[1];
+    public static int[] inventory = new int[2];
+    public int[] inventoryDebug = new int[2];
 
-    public Image[] inventoryItemUI = new Image[1];
-    public Image[] inventoryItemSource = new Image[1];
+    public Image[] inventoryItemUI = new Image[2];
+
+    public TextMeshProUGUI[] inventoryText = new TextMeshProUGUI[2];
+
+    public Sprite[] inventoryItemSource = new Sprite[7];
 
     private void Awake()
     {
@@ -20,10 +24,12 @@ public class Inventory : MonoBehaviour
 
         
 
-        //Reset inventory at start of game
+        //Reset all inventory to empty, or no items collected at start of game
         foreach (int i in inventory)
         {
             inventory[i] = 0;
+            inventoryItemUI[i].sprite = inventoryItemSource[0];
+            inventoryText[i].text = "Empty";
         }
     }
 
