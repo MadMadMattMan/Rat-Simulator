@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
         
 
         //Reset all inventory to empty, or no items collected at start of game
-        foreach (int i in inventory)
+        for (int i = 0; i <= 2; i++)
         {
             inventory[i] = 0;
             inventoryItemUI[i].sprite = inventoryItemSource[0];
@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour
     private void Update()
     {
         //Matches the debugger array to the code array fir debugging purposes
-        foreach (int i in inventory)
+        for (int i = 0; i <= 2; i++)
         {
             inventoryDebug[i] = inventory[i];
         }
