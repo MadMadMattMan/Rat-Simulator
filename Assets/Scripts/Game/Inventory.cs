@@ -20,12 +20,10 @@ public class Inventory : MonoBehaviour
         //Inventory Number Code
         ///0 = null
         ///1 = food item
-        ///2 = shiny things
-
-        
+        ///2 = shiny things        
 
         //Reset all inventory to empty, or no items collected at start of game
-        for (int i = 0; i <= 2; i++)
+        for (int i = 0; i < 2; i++)
         {
             inventory[i] = 0;
             inventoryItemUI[i].sprite = inventoryItemSource[0];
@@ -36,7 +34,7 @@ public class Inventory : MonoBehaviour
     private void Update()
     {
         //Matches the debugger array to the code array fir debugging purposes
-        for (int i = 0; i <= 2; i++)
+        for (int i = 0; i < 2; i++)
         {
             inventoryDebug[i] = inventory[i];
         }
