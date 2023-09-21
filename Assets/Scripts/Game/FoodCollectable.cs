@@ -5,10 +5,12 @@ using UnityEngine;
 public class FoodCollectable : MonoBehaviour
 {
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    private void OnTriggerEnter2D(Collider2D triggerer)
     {
+        if (triggerer.gameObject.name == "Player")
         Inventory.AddItem(1);
-        Destroy(gameObject);
+        Destroy(this);
     }
 
 }

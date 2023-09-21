@@ -25,7 +25,7 @@ public class EggHealthSystem : MonoBehaviour
 		UpdateGraphics();
 	}
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (RatCode.AttackState && Time.timeScale == 1)
 		{
