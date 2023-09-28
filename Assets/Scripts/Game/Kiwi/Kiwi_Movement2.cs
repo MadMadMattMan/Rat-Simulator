@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,8 +20,15 @@ public class Kiwi_Movement2 : MonoBehaviour
 
     public float size;
 
+    public GameObject promptTextBelow;
+
     //an array of different transform positions for the light as we don't understand how to set transform.roation just yet
     public Transform[] KiwiLightPos = new Transform[5];
+
+    private void Awake()
+    {
+        promptTextBelow.SetActive(false);
+    }
 
     void FixedUpdate()
     {
@@ -219,5 +228,18 @@ public class Kiwi_Movement2 : MonoBehaviour
         }
 
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, size);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Shop Zone")
+        {
+
+        }
+
+        if (collision.gameObject.name == "Main Tree Zone")
+        {
+
+        }
     }
 }
