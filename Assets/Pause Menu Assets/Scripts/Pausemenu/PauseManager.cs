@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+
 //using UnityStandardAssets.ImageEffects;
 /// <summary>
 ///  Copyright (c) 2016 Eric Zhu 
@@ -16,6 +18,8 @@ namespace GreatArcStudios
     /// </summary>
     public class PauseManager : MonoBehaviour
     {
+        ControllerInputSystem ControllerSupport;
+
         /// <summary>
         /// This is the main panel holder, which holds the main panel and should be called "main panel"
         /// </summary> 
@@ -281,7 +285,11 @@ namespace GreatArcStudios
         /// </summary>
         public void Awake()
         {
-           
+            ControllerSupport = new ControllerInputSystem();
+            ControllerSupport.Controller.Enable();
+
+            ControllerSupport.Controller.OpenCloseMenu.performed += ctx => OpenCloseMenu();
+
             readUseSimpleTerrain = useSimpleTerrain;
             if (useSimpleTerrain)
             {
@@ -418,6 +426,41 @@ namespace GreatArcStudios
             uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
         }
 
+        void OpenCloseMenu()
+        {
+            if (mainPanel.activeSelf == false)
+            {
+                uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
+                mainPanel.SetActive(true);
+                vidPanel.SetActive(false);
+                audioPanel.SetActive(false);
+                TitleTexts.SetActive(true);
+                mask.SetActive(true);
+                Time.timeScale = 0;
+                for (int i = 0; i < otherUIElements.Length; i++)
+                {
+                    otherUIElements[i].gameObject.SetActive(false);
+                }
+                /* if (blurBool == false)
+                  {
+                     blurEffect.enabled = true;
+                 }  */
+            }
+            else
+            {
+                Time.timeScale = timeScale;
+                mainPanel.SetActive(false);
+                vidPanel.SetActive(false);
+                audioPanel.SetActive(false);
+                TitleTexts.SetActive(false);
+                mask.SetActive(false);
+                for (int i = 0; i < otherUIElements.Length; i++)
+                {
+                    otherUIElements[i].gameObject.SetActive(true);
+                }
+            }
+        }
+
         // Update is called once per frame
         /// <summary>
         /// The update method. This mainly searches for the user pressing the escape key.
@@ -439,40 +482,11 @@ namespace GreatArcStudios
             {
                 pauseMenu.text = "Pause Menu";
             }
-
-            if (Input.GetKeyDown(KeyCode.Escape) && mainPanel.activeSelf == false)
+            
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-
-                uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
-                mainPanel.SetActive(true);
-                vidPanel.SetActive(false);
-                audioPanel.SetActive(false);
-                TitleTexts.SetActive(true);
-                mask.SetActive(true);
-                Time.timeScale = 0;
-                for (int i = 0; i < otherUIElements.Length; i++)
-                {
-                    otherUIElements[i].gameObject.SetActive(false);
-                }
-                /* if (blurBool == false)
-                  {
-                     blurEffect.enabled = true;
-                 }  */
+                OpenCloseMenu();
             }
-            else if(Input.GetKeyDown(KeyCode.Escape) && mainPanel.activeSelf == true) {
-                Time.timeScale = timeScale;
-                mainPanel.SetActive(false);
-                vidPanel.SetActive(false);
-                audioPanel.SetActive(false);
-                TitleTexts.SetActive(false);
-                mask.SetActive(false);
-                for (int i = 0; i < otherUIElements.Length; i++)
-                {
-                    otherUIElements[i].gameObject.SetActive(true);
-                }
-            }
-
-
 
         }
         /*

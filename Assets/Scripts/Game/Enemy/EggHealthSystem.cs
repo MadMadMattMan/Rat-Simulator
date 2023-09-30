@@ -1,13 +1,4 @@
-﻿//==============================================================
-// HealthSystem
-// HealthSystem.Instance.TakeDamage (float Damage);
-// HealthSystem.Instance.HealDamage (float Heal);
-// HealthSystem.Instance.UseMana (float Mana);
-// HealthSystem.Instance.RestoreMana (float Mana);
-// Attach to the Hero.
-//==============================================================
-
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +9,9 @@ public class EggHealthSystem : MonoBehaviour
 	public Text healthText;
 	public float hitPoint = 5f;
 	public float maxHitPoint = 100f;
+
+	public SpriteRenderer egg;
+	public Sprite[] eggStages = new Sprite[5];
 	
 	//Sets UI Graphic to correct values at start of game
   	void Awake()
@@ -39,7 +33,32 @@ public class EggHealthSystem : MonoBehaviour
 		float healthpercent = hitPoint / 100;
 		currentHealthBar.rectTransform.localPosition = new Vector3(currentHealthBar.rectTransform.rect.width * healthpercent - currentHealthBar.rectTransform.rect.width, 0, 0);
 		healthText.text = hitPoint.ToString ("0") + "/" + maxHitPoint.ToString ("0");
-	}
+
+		if (hitPoint >= 90)
+		{
+			egg.sprite = eggStages[0];
+		}
+		else if (hitPoint >= 60)
+        {
+            egg.sprite = eggStages[1];
+        }
+        else if (hitPoint >= 40)
+        {
+            egg.sprite = eggStages[2];
+        }
+        else if (hitPoint >= 20)
+        {
+            egg.sprite = eggStages[3];
+        }
+        else if (hitPoint > 0)
+        {
+            egg.sprite = eggStages[4];
+        }
+        else if (hitPoint == 0)
+        {
+            egg.gameObject.SetActive(false);
+        }
+    }
 
 
 	public void Attacked(float Damage)

@@ -4,6 +4,8 @@ using System.Xml.Serialization;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class Kiwi_Movement2 : MonoBehaviour
 {
@@ -20,16 +22,18 @@ public class Kiwi_Movement2 : MonoBehaviour
 
     public float size;
 
-    public GameObject promptTextBelow;
+    public ControllerInputSystem ControllerSupport;
+    public Toggle ControllerMode;
 
     //an array of different transform positions for the light as we don't understand how to set transform.roation just yet
     public Transform[] KiwiLightPos = new Transform[5];
 
     private void Awake()
     {
-        promptTextBelow.SetActive(false);
+        ControllerSupport = new ControllerInputSystem();
     }
 
+    //Movement
     void FixedUpdate()
     {
         //takes the input from the player, (wasd, arrow keys or controller) and turns it into a float between -1 and 1 and stores that value as a varibale (either inputX or inputY) so it can be referanced later
@@ -44,8 +48,15 @@ public class Kiwi_Movement2 : MonoBehaviour
             Sprint = 5;
         }
 
-        //actually moves the player by timesing the speed variable with the Input.GetAxis (number between -1 and 1) with Time.delta time to normalise the speed between computers with a sprint vaiable to increse the speed if left shift is held down
-        transform.position += new Vector3(speed * InputX * Time.deltaTime * Sprint, speed * InputY * Time.deltaTime * Sprint);
+        //moves the player along the X axis in relation to Horizontal Movement Axis, excludes movement if below controller dead zone
+        if (InputX > 0.25 || InputX < -0.25)
+        {
+            transform.position += new Vector3(speed * InputX * Time.deltaTime * Sprint, 0);
+        }
+
+        //moves the player along the Y axis in relation to Horizontal Movement Axis, excludes movement if below controller dead zone
+        if (InputY > 0.25 || InputY < -0.25)
+            transform.position += new Vector3(0, speed * InputY * Time.deltaTime * Sprint);
 
 
         //Sets light roation, the variable for roation sector and the current state of the player (moving or idle) and stores the variables
@@ -228,18 +239,5 @@ public class Kiwi_Movement2 : MonoBehaviour
         }
 
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, size);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "Shop Zone")
-        {
-
-        }
-
-        if (collision.gameObject.name == "Main Tree Zone")
-        {
-
-        }
     }
 }
