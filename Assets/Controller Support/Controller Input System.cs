@@ -89,6 +89,24 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemSelectionLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb654a4b-5573-4a96-a21c-2a46a72dfa68"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemSelectionRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""63b51c8b-4936-47bf-a259-dc2d4cc28266"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -190,6 +208,28 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                     ""action"": ""Cycle Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c32654c-4263-476f-abbe-0ea7f55c6b75"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemSelectionLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9862f376-13f9-4555-9a65-b73a128f9529"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemSelectionRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -205,6 +245,8 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
         m_Controller_UseItem = m_Controller.FindAction("Use Item", throwIfNotFound: true);
         m_Controller_CycleUp = m_Controller.FindAction("Cycle Up", throwIfNotFound: true);
         m_Controller_CycleDown = m_Controller.FindAction("Cycle Down", throwIfNotFound: true);
+        m_Controller_ItemSelectionLeft = m_Controller.FindAction("ItemSelectionLeft", throwIfNotFound: true);
+        m_Controller_ItemSelectionRight = m_Controller.FindAction("ItemSelectionRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -271,6 +313,8 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
     private readonly InputAction m_Controller_UseItem;
     private readonly InputAction m_Controller_CycleUp;
     private readonly InputAction m_Controller_CycleDown;
+    private readonly InputAction m_Controller_ItemSelectionLeft;
+    private readonly InputAction m_Controller_ItemSelectionRight;
     public struct ControllerActions
     {
         private @ControllerInputSystem m_Wrapper;
@@ -282,6 +326,8 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
         public InputAction @UseItem => m_Wrapper.m_Controller_UseItem;
         public InputAction @CycleUp => m_Wrapper.m_Controller_CycleUp;
         public InputAction @CycleDown => m_Wrapper.m_Controller_CycleDown;
+        public InputAction @ItemSelectionLeft => m_Wrapper.m_Controller_ItemSelectionLeft;
+        public InputAction @ItemSelectionRight => m_Wrapper.m_Controller_ItemSelectionRight;
         public InputActionMap Get() { return m_Wrapper.m_Controller; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -312,6 +358,12 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                 @CycleDown.started -= m_Wrapper.m_ControllerActionsCallbackInterface.OnCycleDown;
                 @CycleDown.performed -= m_Wrapper.m_ControllerActionsCallbackInterface.OnCycleDown;
                 @CycleDown.canceled -= m_Wrapper.m_ControllerActionsCallbackInterface.OnCycleDown;
+                @ItemSelectionLeft.started -= m_Wrapper.m_ControllerActionsCallbackInterface.OnItemSelectionLeft;
+                @ItemSelectionLeft.performed -= m_Wrapper.m_ControllerActionsCallbackInterface.OnItemSelectionLeft;
+                @ItemSelectionLeft.canceled -= m_Wrapper.m_ControllerActionsCallbackInterface.OnItemSelectionLeft;
+                @ItemSelectionRight.started -= m_Wrapper.m_ControllerActionsCallbackInterface.OnItemSelectionRight;
+                @ItemSelectionRight.performed -= m_Wrapper.m_ControllerActionsCallbackInterface.OnItemSelectionRight;
+                @ItemSelectionRight.canceled -= m_Wrapper.m_ControllerActionsCallbackInterface.OnItemSelectionRight;
             }
             m_Wrapper.m_ControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -337,6 +389,12 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                 @CycleDown.started += instance.OnCycleDown;
                 @CycleDown.performed += instance.OnCycleDown;
                 @CycleDown.canceled += instance.OnCycleDown;
+                @ItemSelectionLeft.started += instance.OnItemSelectionLeft;
+                @ItemSelectionLeft.performed += instance.OnItemSelectionLeft;
+                @ItemSelectionLeft.canceled += instance.OnItemSelectionLeft;
+                @ItemSelectionRight.started += instance.OnItemSelectionRight;
+                @ItemSelectionRight.performed += instance.OnItemSelectionRight;
+                @ItemSelectionRight.canceled += instance.OnItemSelectionRight;
             }
         }
     }
@@ -350,5 +408,7 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
         void OnUseItem(InputAction.CallbackContext context);
         void OnCycleUp(InputAction.CallbackContext context);
         void OnCycleDown(InputAction.CallbackContext context);
+        void OnItemSelectionLeft(InputAction.CallbackContext context);
+        void OnItemSelectionRight(InputAction.CallbackContext context);
     }
 }

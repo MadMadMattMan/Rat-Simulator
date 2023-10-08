@@ -21,6 +21,7 @@ public class ShopMenuScript : MonoBehaviour
         {
             shopMenuStatic.SetActive(false);
         }
+
         //Open shop if shop closed and vice versa
         else if (!shopMenuStatic.activeSelf)
         {

@@ -8,12 +8,19 @@ public class Interaction : MonoBehaviour
     ControllerInputSystem ControllerSupport;
     public static GameObject TriggerInside = null;
 
+    public static int SelectedItem;
+    public RectTransform Highlight;
+    public RectTransform HighlightDefault;
+    public RectTransform HighlightFlipped;
+
     private void Awake()
     {
         ControllerSupport = new ControllerInputSystem();
         ControllerSupport.Controller.Enable();
 
         ControllerSupport.Controller.Interact.performed += ctx => Interact();
+        ControllerSupport.Controller.ItemSelectionLeft.performed += ctx => ItemSelector("Left");
+        ControllerSupport.Controller.ItemSelectionRight.performed += ctx => ItemSelector("Right");
     }
 
     public void Update()
@@ -21,6 +28,26 @@ public class Interaction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
+        }
+
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            ItemSelector("Left");
+        }
+        else if (Input.mouseScrollDelta.y < 0)
+        {
+            ItemSelector("Right");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectedItem = 1;
+            UpdateVisuals();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectedItem = 2;
+            UpdateVisuals();
         }
     }
 
@@ -52,7 +79,28 @@ public class Interaction : MonoBehaviour
 
         if (TriggerInside.name == "Egg Interact Zone")
         {
-            //
+            if (SelectedItem == 1)
+            {
+                if (Inventory.inventory[0] == 0)
+                {
+                    Debug.Log("Item Slot Empty");
+                }
+                else
+                {
+                    Debug.Log("Used Item1 On egg");
+                }
+            }
+            else if (SelectedItem == 2)
+            {
+                if (Inventory.inventory[1] == 0)
+                {
+                    Debug.Log("Item Slot Empty");
+                }
+                else
+                {
+                    Debug.Log("Used Item2 On egg");
+                }
+            }
         }
 
         if (TriggerInside.name == "Morepork Interact Zone")
@@ -65,5 +113,35 @@ public class Interaction : MonoBehaviour
             //
         }
     }
+
+    public void ItemSelector(string Direction)
+    {
+        if (Direction == "Left")
+        {
+            SelectedItem++;
+            if (SelectedItem == 3)
+            {
+                SelectedItem = 1;
+            }
+            UpdateVisuals();
+        }
+        if (Direction == "Right")
+        {
+            SelectedItem--;
+            if (SelectedItem == 0)
+            {
+                SelectedItem = 2;
+            }
+            UpdateVisuals();
+        }
+    }
+
+    private void UpdateVisuals()
+    {
+        if (SelectedItem == 1)
+            Highlight.position = HighlightFlipped.position;
+        else if (SelectedItem == 2)
+            Highlight.position = HighlightDefault.position;
+    } 
 
 }

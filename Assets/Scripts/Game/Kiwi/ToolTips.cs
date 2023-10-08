@@ -56,6 +56,7 @@ public class ToolTips : MonoBehaviour
                 Text.text = "use 'A' to use selected item on Egg";
             else
                 Text.text = "use 'E' to use selected item on Egg";
+            promptTextBelow.SetActive(true);
         }
     }
 
