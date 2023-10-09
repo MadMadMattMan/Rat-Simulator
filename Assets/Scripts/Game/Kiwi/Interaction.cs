@@ -83,18 +83,28 @@ public class Interaction : MonoBehaviour
             {
                 if (Inventory.inventory[0] == 0)
                 {
-                    Debug.Log("Item Slot Empty");
+                    Debug.Log("Item1 Slot Empty");
                 }
-                else
+                else if (Inventory.inventory[0] == 1)
                 {
-                    Debug.Log("Used Item1 On egg");
+                    EggHealthSystem.HealerStatic = 25;
+                    Inventory.RemoveItem(0);
+                }
+                else if (Inventory.inventory[0] == 2)
+                {
+
+                }
+                else if (Inventory.inventory[0] == 3)
+                {
+                    EggHealthSystem.eggStageInt++;
+                    EggHealthSystem.eggStageTextStatic.text = "Stage " + EggHealthSystem.eggStageInt;
                 }
             }
             else if (SelectedItem == 2)
             {
                 if (Inventory.inventory[1] == 0)
                 {
-                    Debug.Log("Item Slot Empty");
+                    Debug.Log("Item2 Slot Empty");
                 }
                 else
                 {

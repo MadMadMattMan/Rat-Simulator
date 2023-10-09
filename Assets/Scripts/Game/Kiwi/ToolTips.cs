@@ -65,6 +65,7 @@ public class ToolTips : MonoBehaviour
         if (collision.gameObject.name == "Shop Zone")
         {
             promptTextBelow.SetActive(false);
+            ShopMenuScript.OpenCloseShop("closed");
         }
 
         if (collision.gameObject.name == "Egg Interact Zone")

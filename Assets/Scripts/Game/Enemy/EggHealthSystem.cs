@@ -10,13 +10,22 @@ public class EggHealthSystem : MonoBehaviour
 	public float hitPoint = 5f;
 	public float maxHitPoint = 100f;
 
+	public static int HealerStatic;
+
 	public SpriteRenderer egg;
 	public Sprite[] eggStages = new Sprite[5];
+
+	public Text eggStageText;
+	public static Text eggStageTextStatic;
+	public static int eggStageInt;
 	
 	//Sets UI Graphic to correct values at start of game
   	void Awake()
 	{
-		UpdateGraphics();
+        UpdateHealthBar();
+		eggStageInt = 0;
+		eggStageTextStatic = eggStageText;
+		eggStageTextStatic.text = "Stage " + eggStageInt;
 	}
 
     private void FixedUpdate()
@@ -24,6 +33,12 @@ public class EggHealthSystem : MonoBehaviour
         if (RatCode.AttackState && Time.timeScale == 1)
 		{
 			Attacked(0.005f);
+		}
+
+		if (HealerStatic != 0)
+		{
+			Heal(HealerStatic);
+			HealerStatic = 0;
 		}
     }
 
@@ -34,7 +49,7 @@ public class EggHealthSystem : MonoBehaviour
 		currentHealthBar.rectTransform.localPosition = new Vector3(currentHealthBar.rectTransform.rect.width * healthpercent - currentHealthBar.rectTransform.rect.width, 0, 0);
 		healthText.text = hitPoint.ToString ("0") + "/" + maxHitPoint.ToString ("0");
 
-		if (hitPoint >= 90)
+		if (hitPoint >= 90 )
 		{
 			egg.sprite = eggStages[0];
 		}
@@ -67,22 +82,18 @@ public class EggHealthSystem : MonoBehaviour
 		if (hitPoint < 1)
 			hitPoint = 0;
 
-		UpdateGraphics();
+        UpdateHealthBar();
 
 		StartCoroutine(TakeDamage());
 	}
 
-	public void Healer(float Heal)
+	public void Heal(float Heal)
 	{
 		hitPoint += Heal;
 		if (hitPoint > maxHitPoint) 
 			hitPoint = maxHitPoint;
 
-		UpdateGraphics();
-	}
-	private void UpdateGraphics()
-	{
-		UpdateHealthBar();
+        UpdateHealthBar();
 	}
 
 	// Coroutine of what happens when the egg gets hurt

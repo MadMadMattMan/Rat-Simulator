@@ -112,13 +112,17 @@ public class Inventory : MonoBehaviour
 
     public static void RemoveItem(int itemRemoved)
     {
-        if (inventory[0] == itemRemoved)
+        if (itemRemoved == 0)
         {
             inventory[0] = 0;
+            inventoryItemUI[0].sprite = inventoryItemSource[0];
+            inventoryText[0].text = "Empty";
         }
-        else if (inventory[1] == itemRemoved)
+        else if (itemRemoved == 1)
         {
             inventory[1] = 0;
+            inventoryItemUI[1].sprite = inventoryItemSource[0];
+            inventoryText[1].text = "Empty";
         }
         else
         {
