@@ -23,7 +23,7 @@ public class EggHealthSystem : MonoBehaviour
   	void Awake()
 	{
         UpdateHealthBar();
-		eggStageInt = 0;
+		eggStageInt = 1;
 		eggStageTextStatic = eggStageText;
 		eggStageTextStatic.text = "Stage " + eggStageInt;
 	}

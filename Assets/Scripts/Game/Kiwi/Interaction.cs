@@ -84,21 +84,23 @@ public class Interaction : MonoBehaviour
                 if (Inventory.inventory[0] == 0)
                 {
                     Debug.Log("Item1 Slot Empty");
-                }
+                } //If inventory Empty
                 else if (Inventory.inventory[0] == 1)
                 {
                     EggHealthSystem.HealerStatic = 25;
                     Inventory.RemoveItem(0);
-                }
+                } //If item is healer
                 else if (Inventory.inventory[0] == 2)
                 {
-
+                    Debug.Log("Cannot Use item on Egg");
+                    ToolTips.QuickMessage("Can't use item on eggs");
                 }
                 else if (Inventory.inventory[0] == 3)
                 {
                     EggHealthSystem.eggStageInt++;
                     EggHealthSystem.eggStageTextStatic.text = "Stage " + EggHealthSystem.eggStageInt;
-                }
+                    Inventory.RemoveItem(0);
+                } // If item is leveler upper
             }
             else if (SelectedItem == 2)
             {
