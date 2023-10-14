@@ -107,6 +107,15 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""3fe638e8-fc19-4c8b-aa20-c81b8a7424df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -230,6 +239,17 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                     ""action"": ""ItemSelectionRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79348e72-f1de-48f1-bffa-720bd71e5313"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -247,6 +267,7 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
         m_Controller_CycleDown = m_Controller.FindAction("Cycle Down", throwIfNotFound: true);
         m_Controller_ItemSelectionLeft = m_Controller.FindAction("ItemSelectionLeft", throwIfNotFound: true);
         m_Controller_ItemSelectionRight = m_Controller.FindAction("ItemSelectionRight", throwIfNotFound: true);
+        m_Controller_DropItem = m_Controller.FindAction("DropItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +336,7 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
     private readonly InputAction m_Controller_CycleDown;
     private readonly InputAction m_Controller_ItemSelectionLeft;
     private readonly InputAction m_Controller_ItemSelectionRight;
+    private readonly InputAction m_Controller_DropItem;
     public struct ControllerActions
     {
         private @ControllerInputSystem m_Wrapper;
@@ -328,6 +350,7 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
         public InputAction @CycleDown => m_Wrapper.m_Controller_CycleDown;
         public InputAction @ItemSelectionLeft => m_Wrapper.m_Controller_ItemSelectionLeft;
         public InputAction @ItemSelectionRight => m_Wrapper.m_Controller_ItemSelectionRight;
+        public InputAction @DropItem => m_Wrapper.m_Controller_DropItem;
         public InputActionMap Get() { return m_Wrapper.m_Controller; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -364,6 +387,9 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                 @ItemSelectionRight.started -= m_Wrapper.m_ControllerActionsCallbackInterface.OnItemSelectionRight;
                 @ItemSelectionRight.performed -= m_Wrapper.m_ControllerActionsCallbackInterface.OnItemSelectionRight;
                 @ItemSelectionRight.canceled -= m_Wrapper.m_ControllerActionsCallbackInterface.OnItemSelectionRight;
+                @DropItem.started -= m_Wrapper.m_ControllerActionsCallbackInterface.OnDropItem;
+                @DropItem.performed -= m_Wrapper.m_ControllerActionsCallbackInterface.OnDropItem;
+                @DropItem.canceled -= m_Wrapper.m_ControllerActionsCallbackInterface.OnDropItem;
             }
             m_Wrapper.m_ControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -395,6 +421,9 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                 @ItemSelectionRight.started += instance.OnItemSelectionRight;
                 @ItemSelectionRight.performed += instance.OnItemSelectionRight;
                 @ItemSelectionRight.canceled += instance.OnItemSelectionRight;
+                @DropItem.started += instance.OnDropItem;
+                @DropItem.performed += instance.OnDropItem;
+                @DropItem.canceled += instance.OnDropItem;
             }
         }
     }
@@ -410,5 +439,6 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
         void OnCycleDown(InputAction.CallbackContext context);
         void OnItemSelectionLeft(InputAction.CallbackContext context);
         void OnItemSelectionRight(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
     }
 }

@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class ShinyCollectable : MonoBehaviour
 {
+    private void Awake()
+    {
+        SpawnDealy();
+    }
+
+    IEnumerator SpawnDealy()
+    {
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        yield return new WaitForSecondsRealtime(2.5f);
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D triggerer)
     {
         if (triggerer.gameObject.name == "Player")

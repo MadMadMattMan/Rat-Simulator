@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class FoodCollectable : MonoBehaviour
 {
+    private void Start()
+    {
+        SpawnDealy();
+    }
+
+    IEnumerator SpawnDealy()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D triggerer)
     {
         if (triggerer.gameObject.name == "Player")

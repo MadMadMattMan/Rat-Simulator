@@ -13,6 +13,8 @@ public class Interaction : MonoBehaviour
     public RectTransform HighlightDefault;
     public RectTransform HighlightFlipped;
 
+    public GameObject[] ItemSpawn = new GameObject[2];
+
     private void Awake()
     {
         ControllerSupport = new ControllerInputSystem();
@@ -21,6 +23,8 @@ public class Interaction : MonoBehaviour
         ControllerSupport.Controller.Interact.performed += ctx => Interact();
         ControllerSupport.Controller.ItemSelectionLeft.performed += ctx => ItemSelector("Left");
         ControllerSupport.Controller.ItemSelectionRight.performed += ctx => ItemSelector("Right");
+        ControllerSupport.Controller.DropItem.performed += ctx => DropItem();
+
     }
 
     public void Update()
@@ -28,6 +32,11 @@ public class Interaction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            DropItem();
         }
 
         if (Input.mouseScrollDelta.y > 0)
@@ -61,8 +70,7 @@ public class Interaction : MonoBehaviour
         TriggerInside = null;
 
         if (collision.gameObject.name == "Shop Zone")
-            ShopMenuScript.OpenCloseShop("close");
-            
+            ShopMenuScript.OpenCloseShop("close");      
     }
 
     public static void Interact()
@@ -156,4 +164,15 @@ public class Interaction : MonoBehaviour
             Highlight.position = HighlightDefault.position;
     } 
 
+    public void DropItem()
+    {
+        for (int i = 1; i <= 3; i++)
+        {
+            if (Inventory.inventory[SelectedItem - 1] == i)
+            {
+                Instantiate(ItemSpawn[i - 1], gameObject.transform.position, gameObject.transform.rotation);
+                Inventory.RemoveItem(SelectedItem - 1);
+            }
+        }
+    }
 }
