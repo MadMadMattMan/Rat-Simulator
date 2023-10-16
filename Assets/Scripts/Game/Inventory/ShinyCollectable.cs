@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class ShinyCollectable : MonoBehaviour
 {
-    private void Awake()
+    private ControllerInputSystem ControllerSupport;
+    private bool Pickup;
+
+    private void Start()
     {
-        SpawnDealy();
+        Pickup = false;
+
+        ControllerSupport = new ControllerInputSystem();
+        ControllerSupport.Controller.Enable();
+
+        ControllerSupport.Controller.Pickup.performed += ctx => Pickup = true;
     }
 
-    IEnumerator SpawnDealy()
+    private void Update()
     {
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        yield return new WaitForSecondsRealtime(2.5f);
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D triggerer)
-    {
-        if (triggerer.gameObject.name == "Player")
+        if (Input.GetKeyDown(KeyCode.F))
         {
+            Pickup = true;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D triggerer)
+    {
+        if (triggerer.gameObject.name == "Player" && Pickup == true)
+        {
+            Pickup = false;
             if (Inventory.inventory[0] == 0 || Inventory.inventory[1] == 0)
             {
                 Inventory.AddItem(2);
