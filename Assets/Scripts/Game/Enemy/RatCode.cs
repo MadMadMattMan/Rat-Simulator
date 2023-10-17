@@ -9,6 +9,12 @@ public class RatCode : MonoBehaviour
     public Transform Target;
     public Transform Attack;
 
+    public Sprite AttackSprite;
+
+    public Animator Animator;
+    public Transform RatTransform;
+    public SpriteRenderer Renderer;
+
     public static bool AttackState = true;
 
     public AIPath RatPathfinding; //Imported from A*
@@ -16,7 +22,10 @@ public class RatCode : MonoBehaviour
 
     private void Start()
     {
+        AttackState = false;
+
         Vector3 DistanceToPlayer = transform.position - Player.position;
+
         if (DistanceToPlayer.magnitude < 2.5f)
         {
             Destroy(gameObject);
@@ -24,6 +33,7 @@ public class RatCode : MonoBehaviour
         else
         {
             RatDestination.target = Attack;
+            RatPathfinding.maxSpeed = 1;
         }
     }
 
@@ -38,9 +48,31 @@ public class RatCode : MonoBehaviour
         //If player gets to close to rat - run away
         if (DistanceToPlayer.magnitude < 1)
         {
+            gameObject.GetComponent<Animator>().enabled = true;
             RatDestination.target = Target;
+            RatPathfinding.maxSpeed = 1.55f;
+        }
+
+        if (DistanceToTarget.magnitude < 0.15f)
+        {
+            Destroy(gameObject);
+        }
+
+        if (DistanceToAttack.magnitude < 0.05f)
+        {
+            IsAttacking();
         }
     }
 
-
+    IEnumerator IsAttacking()
+    {
+        Animator.SetBool("Run", false);
+        gameObject.SetActive(false);
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(true);
+        RatTransform.position = Attack.position;
+        AttackState = true;
+        Renderer.sprite = AttackSprite;
+        yield return null;
+    }
 }
