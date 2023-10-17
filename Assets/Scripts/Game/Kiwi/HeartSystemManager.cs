@@ -25,9 +25,7 @@ public class HeartSystemManager : MonoBehaviour
     public static float health;
     public float currenthealth;
 
-    [SerializeField]
     private float maxHealth;
-    [SerializeField]
     private float maxTotalHealth;
 
     public float Health { get { return health; } }

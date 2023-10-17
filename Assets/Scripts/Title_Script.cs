@@ -14,4 +14,14 @@ public class Title_Script : MonoBehaviour
     {
         SceneManager.LoadScene("Game Scene");
     }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+    public void Tutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
 }
