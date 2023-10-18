@@ -5,11 +5,10 @@ using Pathfinding; //Imported asset that has the scripts for pathfinding
 
 public class RatCode : MonoBehaviour
 {
+
     public Transform Player;
     public Transform Target;
     public Transform Attack;
-
-    public Sprite AttackSprite;
 
     public Animator Animator;
     public Transform RatTransform;
@@ -48,13 +47,13 @@ public class RatCode : MonoBehaviour
         //If player gets to close to rat - run away
         if (DistanceToPlayer.magnitude < 1)
         {
-            gameObject.GetComponent<Animator>().enabled = true;
             RatDestination.target = Target;
             RatPathfinding.maxSpeed = 1.55f;
         }
 
         if (DistanceToTarget.magnitude < 0.15f)
         {
+            RatSpawnCode.RatSpawnDelay(Random.Range(15, 60));
             Destroy(gameObject);
         }
 
@@ -64,15 +63,15 @@ public class RatCode : MonoBehaviour
         }
     }
 
-    IEnumerator IsAttacking()
+    public void IsAttacking()
     {
         Animator.SetBool("Run", false);
-        gameObject.SetActive(false);
-        yield return new WaitForSeconds(1);
-        gameObject.SetActive(true);
-        RatTransform.position = Attack.position;
+        Renderer.sortingOrder = 2;
         AttackState = true;
-        Renderer.sprite = AttackSprite;
-        yield return null;
+    }
+
+    void StartFinal()
+    {
+        AttackState = false;
     }
 }
