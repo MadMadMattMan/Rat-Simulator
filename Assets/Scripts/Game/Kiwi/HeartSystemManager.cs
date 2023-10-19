@@ -57,7 +57,7 @@ public class HeartSystemManager : MonoBehaviour
         {
             ClampHealth();
         }
-        currenthealth = health;
+        health = currenthealth;
 
         if (health == 0)
         {

@@ -108,7 +108,7 @@ public class Interaction : MonoBehaviour
                     EggHealthSystem.eggStageInt++;
                     EggHealthSystem.eggStageTextStatic.text = "Stage " + EggHealthSystem.eggStageInt;
                     Inventory.RemoveItem(0);
-                } // If item is leveler upper
+                } //If item levels up egg
             }
             else if (SelectedItem == 2)
             {
@@ -118,7 +118,26 @@ public class Interaction : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Used Item2 On egg");
+                    if (Inventory.inventory[0] == 0)
+                    {
+                        Debug.Log("Item1 Slot Empty");
+                    } //If inventory Empty
+                    else if (Inventory.inventory[0] == 1)
+                    {
+                        EggHealthSystem.HealerStatic = 25;
+                        Inventory.RemoveItem(0);
+                    } //If item is healer
+                    else if (Inventory.inventory[0] == 2)
+                    {
+                        Debug.Log("Cannot Use item on Egg");
+                        ToolTips.QuickMessage("Can't use item on eggs");
+                    }
+                    else if (Inventory.inventory[0] == 3)
+                    {
+                        EggHealthSystem.eggStageInt++;
+                        EggHealthSystem.eggStageTextStatic.text = "Stage " + EggHealthSystem.eggStageInt;
+                        Inventory.RemoveItem(0);
+                    } //If item levels up egg
                 }
             }
         }
