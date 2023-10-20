@@ -90,7 +90,37 @@ public class ToolTips : MonoBehaviour
         }
     }
 
-    public static IEnumerator QuickMessage(string msg)
+
+    ///ALL FOR QUICK MESSAGE SYSTEM <summary>
+
+    public static string QuickMessageTxt;
+    public static bool StartQuickMessageBool;
+
+    public static void StartQuickMessage(string msg)
+    {
+        QuickMessageTxt = msg;
+        StartQuickMessageBool = true;
+    }
+
+    private void Update()
+    {
+        if (StartQuickMessageBool)
+        {
+            StartQuickMessageBool = false;
+            SetQuickMessage();
+        }
+    }
+
+    private void SetQuickMessage()
+    {
+        if (QuickMessageTxt != null)
+        {
+            StopAllCoroutines();
+            StartCoroutine(QuickMessage(QuickMessageTxt));
+        }
+    }
+
+    public IEnumerator QuickMessage(string msg)
     {
         string CurrentText = StaticText.text;
         bool CurrentState = StaticText.gameObject.activeSelf;
@@ -100,5 +130,6 @@ public class ToolTips : MonoBehaviour
         StaticText.text = CurrentText;
         if (!CurrentState)
             StaticText.gameObject.SetActive(false);
+        QuickMessageTxt = null;
     }
 }

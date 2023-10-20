@@ -25,8 +25,8 @@ public class HeartSystemManager : MonoBehaviour
     public static float health;
     public float currenthealth;
 
-    private float maxHealth;
-    private float maxTotalHealth;
+    public float maxHealth;
+    public float maxTotalHealth;
 
     public float Health { get { return health; } }
     public float MaxHealth { get { return maxHealth; } }
@@ -46,6 +46,7 @@ public class HeartSystemManager : MonoBehaviour
 
     public void Awake()
     {
+        maxHealth = 3;
         health = 3;
         currenthealth = 3;
     }

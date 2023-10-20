@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -836734335, guid: 25259446491c97943a27f0761e634e17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -126,7 +126,6 @@ MonoBehaviour:
   Attack: {fileID: 0}
   Animator: {fileID: 7770338511456043482}
   RatTransform: {fileID: 7770338511456043483}
-  Renderer: {fileID: 0}
   RatPathfinding: {fileID: 7770338511456043487}
   RatDestination: {fileID: 7770338511456043485}
 --- !u!114 &7770338511456043486

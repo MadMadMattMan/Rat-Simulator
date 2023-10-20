@@ -12,15 +12,18 @@ public class RatCode : MonoBehaviour
 
     public Animator Animator;
     public Transform RatTransform;
-    public SpriteRenderer Renderer;
 
-    public static bool AttackState = true;
+    public static bool AttackState = false;
 
     public AIPath RatPathfinding; //Imported from A*
     public AIDestinationSetter RatDestination; //Imported from A*
 
     private void Start()
     {
+        Player = GameObject.Find("Player").transform;
+        Target = GameObject.Find("Rat Target").transform;
+        Attack = GameObject.Find("Rat Attack").transform;
+
         AttackState = false;
 
         Vector3 DistanceToPlayer = transform.position - Player.position;
@@ -53,7 +56,6 @@ public class RatCode : MonoBehaviour
 
         if (DistanceToTarget.magnitude < 0.15f)
         {
-            RatSpawnCode.RatSpawnDelay(Random.Range(15, 60));
             Destroy(gameObject);
         }
 
@@ -65,8 +67,6 @@ public class RatCode : MonoBehaviour
 
     public void IsAttacking()
     {
-        Animator.SetBool("Run", false);
-        Renderer.sortingOrder = 2;
         AttackState = true;
     }
 

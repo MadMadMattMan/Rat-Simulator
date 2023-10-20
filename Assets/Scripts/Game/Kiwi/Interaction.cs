@@ -19,6 +19,7 @@ public class Interaction : MonoBehaviour
     {
         ControllerSupport = new ControllerInputSystem();
         ControllerSupport.Controller.Enable();
+        SelectedItem = 2;
 
         ControllerSupport.Controller.Interact.performed += ctx => Interact();
         ControllerSupport.Controller.ItemSelectionLeft.performed += ctx => ItemSelector("Left");
@@ -77,15 +78,13 @@ public class Interaction : MonoBehaviour
     {
         if (TriggerInside == null)
         {
-            Debug.Log("Nothing to interact with");
+            ToolTips.StartQuickMessage("Nothing to interact with");
         }
-
-        if (TriggerInside.name == "Shop Zone")
+        else if (TriggerInside.name == "Shop Zone")
         {
             ShopMenuScript.OpenCloseShop(null);
         }
-
-        if (TriggerInside.name == "Egg Interact Zone")
+        else if (TriggerInside.name == "Egg Interact Zone")
         {
             if (SelectedItem == 1)
             {
@@ -101,12 +100,12 @@ public class Interaction : MonoBehaviour
                 else if (Inventory.inventory[0] == 2)
                 {
                     Debug.Log("Cannot Use item on Egg");
-                    ToolTips.QuickMessage("Can't use item on eggs");
+                    ToolTips.StartQuickMessage("Can't use item on eggs");
                 }
                 else if (Inventory.inventory[0] == 3)
                 {
                     EggHealthSystem.eggStageInt++;
-                    EggHealthSystem.eggStageTextStatic.text = "Stage " + EggHealthSystem.eggStageInt;
+                    EggHealthSystem.eggStageTextStatic.text = "Stage " + EggHealthSystem.eggStageInt.ToString();
                     Inventory.RemoveItem(0);
                 } //If item levels up egg
             }
@@ -118,36 +117,35 @@ public class Interaction : MonoBehaviour
                 }
                 else
                 {
-                    if (Inventory.inventory[0] == 0)
+                    if (Inventory.inventory[1] == 0)
                     {
                         Debug.Log("Item1 Slot Empty");
                     } //If inventory Empty
-                    else if (Inventory.inventory[0] == 1)
+                    else if (Inventory.inventory[1] == 1)
                     {
                         EggHealthSystem.HealerStatic = 25;
-                        Inventory.RemoveItem(0);
+                        Inventory.RemoveItem(1);
                     } //If item is healer
-                    else if (Inventory.inventory[0] == 2)
+                    else if (Inventory.inventory[1] == 2)
                     {
                         Debug.Log("Cannot Use item on Egg");
-                        ToolTips.QuickMessage("Can't use item on eggs");
+                        ToolTips.StartQuickMessage("Can't use item on egg");
                     }
-                    else if (Inventory.inventory[0] == 3)
+                    else if (Inventory.inventory[1] == 3)
                     {
                         EggHealthSystem.eggStageInt++;
                         EggHealthSystem.eggStageTextStatic.text = "Stage " + EggHealthSystem.eggStageInt;
-                        Inventory.RemoveItem(0);
+                        Inventory.RemoveItem(1);
                     } //If item levels up egg
                 }
             }
         }
 
-        if (TriggerInside.name == "Morepork Interact Zone")
+        else if (TriggerInside.name == "Morepork Interact Zone")
         {
             //
         }
-
-        if (TriggerInside.name == "Penguin Interact Zone")
+        else if (TriggerInside.name == "Penguin Interact Zone")
         {
             //
         }
