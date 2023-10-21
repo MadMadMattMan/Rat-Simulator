@@ -48,11 +48,14 @@ public class ToolTips : MonoBehaviour
 
         if (collision.gameObject.name == "Penguin Interact Zone")
         {
-            if (ControllerMode.isOn)
-                Text.text = "use 'A' to talk to Penguin";
-            else
-                Text.text = "use 'E' to talk to Penguin";
-            promptTextBelow.SetActive(true);
+            if (!PenguinScript.GivenItem)
+            {
+                if (ControllerMode.isOn)
+                    Text.text = "use 'A' to talk to Penguin";
+                else
+                    Text.text = "use 'E' to talk to Penguin";
+                promptTextBelow.SetActive(true);
+            }
         }
 
         if (collision.gameObject.name == "Egg Interact Zone")

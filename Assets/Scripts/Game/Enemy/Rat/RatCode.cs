@@ -69,9 +69,4 @@ public class RatCode : MonoBehaviour
     {
         AttackState = true;
     }
-
-    void StartFinal()
-    {
-        AttackState = false;
-    }
 }

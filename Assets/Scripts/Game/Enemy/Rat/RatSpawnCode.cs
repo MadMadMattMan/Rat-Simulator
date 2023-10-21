@@ -14,17 +14,17 @@ public class RatSpawnCode : MonoBehaviour
         EvilRatPrefab = EvilRat;
         //int WaitTime = Random.Range(20, 50);
         int WaitTime = TestTime;
-        Debug.Log("Start Iniciated");
+        //Debug.Log("Start Iniciated");
         StartCoroutine(RatSpawnDelay(WaitTime));
     }
 
     //Delays the rats spawn for 'Time' amount of time and then spawns one
     public IEnumerator RatSpawnDelay(int Time)
     {
-        Debug.Log("SpawnDelay Iniciated");
+        //Debug.Log("SpawnDelay Iniciated");
         yield return new WaitForSeconds(Time);
         Instantiate(EvilRatPrefab);
-        Debug.Log("Rat Spawned");
+        //Debug.Log("Rat Spawned");
     }
 
     private void Update()

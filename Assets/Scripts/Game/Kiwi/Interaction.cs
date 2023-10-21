@@ -15,6 +15,7 @@ public class Interaction : MonoBehaviour
 
     public GameObject[] ItemSpawn = new GameObject[2];
 
+    //Awake function sets up all teh variables and states the controller actions and assigns a void to it
     private void Awake()
     {
         ControllerSupport = new ControllerInputSystem();
@@ -28,6 +29,7 @@ public class Interaction : MonoBehaviour
 
     }
 
+    //Checks for user inputs and starts the designated void for keyboard and mouse
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -61,11 +63,14 @@ public class Interaction : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    //Assigns the Triggerinside variable to the triggers gameobject that the player is inside of
+    public void OnTriggerStay2D(Collider2D collision)
     {
         TriggerInside = collision.gameObject;
     }
 
+    //Resets Triggerinside when player leaves a trigger zone
+    //Closes the shop menu when player leaves the shop
     public void OnTriggerExit2D(Collider2D collision)
     {
         TriggerInside = null;
@@ -74,16 +79,22 @@ public class Interaction : MonoBehaviour
             ShopMenuScript.OpenCloseShop("close");      
     }
 
+
+    //All the interaction code
     public static void Interact()
     {
+        //Player guidance if they try to interact with something uninteractable
         if (TriggerInside == null)
         {
             ToolTips.StartQuickMessage("Nothing to interact with");
         }
+        //Opens the shop if player talks to KEA
         else if (TriggerInside.name == "Shop Zone")
         {
             ShopMenuScript.OpenCloseShop(null);
         }
+
+        //Uses selected item in inventory to feed to egg, food heals, leveler upper ups the stage the player in on and shiny things can't be used so the tooltips are used to guide the player
         else if (TriggerInside.name == "Egg Interact Zone")
         {
             if (SelectedItem == 1)
@@ -145,10 +156,63 @@ public class Interaction : MonoBehaviour
         {
             //
         }
+
+        //If the player has not recived an item, interact with the penguin and if the player has recived an item, don't and tell player that
         else if (TriggerInside.name == "Penguin Interact Zone")
         {
-            //
+            //Debug.Log("Interacted With Penguin");
+            if (!PenguinScript.GivenItem)
+                PenguinScript.PenguinInteracted();
+            else
+                ToolTips.StartQuickMessage("Penguin doesn't want to talk right now");
         }
+    }
+
+    public static void NPCInteract(string type)
+    {
+        if (type == "Penguin")
+        {
+            if (SelectedItem == 1)
+            {
+                if (Inventory.inventory[0] == 0)
+                {
+                    Debug.Log("Item1 Slot Empty");
+                } //If inventory Empty
+                else if (Inventory.inventory[0] == 1)
+                {
+                    PenguinScript.GaveFood();
+                    Inventory.RemoveItem(0);
+                } //If item is healer
+                else if (Inventory.inventory[0] == 2 | Inventory.inventory[0] == 3)
+                {
+                    Debug.Log("Cannot Use item on Egg");
+                    ToolTips.StartQuickMessage("Penguin doesn't need this");
+                }
+            }
+            else if (SelectedItem == 2)
+            {
+                if (Inventory.inventory[1] == 0)
+                {
+                    Debug.Log("Item1 Slot Empty");
+                } //If inventory Empty
+                else if (Inventory.inventory[1] == 1)
+                {
+                    PenguinScript.GaveFood();
+                    Inventory.RemoveItem(1);
+                } //If item is healer
+                else if (Inventory.inventory[1] == 2 | Inventory.inventory[1] == 3)
+                {
+                    Debug.Log("Cannot Use item on Egg");
+                    ToolTips.StartQuickMessage("Penguin doesn't need this");
+                }
+            }
+        }
+
+        if (type == "Morepork")
+        {
+
+        }
+        
     }
 
     public void ItemSelector(string Direction)

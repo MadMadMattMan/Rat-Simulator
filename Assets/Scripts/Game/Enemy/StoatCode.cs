@@ -9,6 +9,7 @@ public class StoatCode : MonoBehaviour
 {
     public Transform Player;
     public Transform RoamPos;
+    public static Transform Stoat;
 
     public float StoatRoam = 0.25f;
     public float StoatChase = 0.75f;
@@ -19,21 +20,19 @@ public class StoatCode : MonoBehaviour
     public AIPath StoatPathfinding; //Imported from A*
     public AIDestinationSetter StoatDestination; //Imported from A*
 
-    public RaycastHit2D PlayerRay;
-    public RaycastHit2D RoamRay;
+    public static bool InPenguinTP = false;
 
     private void Awake()
     {
         StoatState = "idle";
         RoamPos.position = transform.position;
+        Stoat = gameObject.transform;
     }
 
     private void Update()
     {
-        //PlayerRay = Physics2D.Raycast()
-        //RoamRay = Physics2D.Raycast()
 
-        //if the stoat stops moving (ie at roam pos) create a new random roam position
+        //if the stoat stops moving (meaning it has reached roam pos), create a new random roam position
         if (StoatPathfinding.desiredVelocity.x == 0 && StoatPathfinding.desiredVelocity.y == 0)
         {
             float randomX = Random.Range(-2, 2); //Random float value used for random roam (x)
@@ -97,8 +96,10 @@ public class StoatCode : MonoBehaviour
         {
             HeartSystemManager.health -= 1;
             StartCoroutine(AttackPause());
-        }
+        }        
     }
+
+
     //Coroutine that disingades the stoat from the player when it hits the player to prevent the stoat sticking to or pushing the player
     private IEnumerator AttackPause()
     {
