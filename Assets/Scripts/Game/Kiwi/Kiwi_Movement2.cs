@@ -22,9 +22,12 @@ public class Kiwi_Movement2 : MonoBehaviour
     public Animator PlayerMovement;
 
     public float size;
+    public bool Walking = false;
 
     public ControllerInputSystem ControllerSupport;
     public Toggle ControllerMode;
+
+    public AudioSource PlayerWalkSFX;
 
     //an array of different transform positions for the light as we don't understand how to set transform.roation just yet
     public Transform[] KiwiLightPos = new Transform[5];
@@ -119,6 +122,13 @@ public class Kiwi_Movement2 : MonoBehaviour
         if (InputX > -0.15f && InputX < 0.15f && InputY > -0.15f && InputY < 0.15f)
         {
             State = "idle";
+            if (Walking)
+                Walking = false;
+        }
+        else
+        {
+            if (!Walking)
+                Walking = true;
         }
 
         //Animations
@@ -240,5 +250,17 @@ public class Kiwi_Movement2 : MonoBehaviour
         }
 
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, size);
+    }
+
+    public void Update()
+    {
+        if (Walking == true && !PlayerWalkSFX.isPlaying)
+        {
+            PlayerWalkSFX.Play();
+        } 
+        else if (Walking == false && PlayerWalkSFX.isPlaying)
+        {
+            PlayerWalkSFX.Stop();
+        }
     }
 }
