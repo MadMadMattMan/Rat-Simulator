@@ -18,7 +18,7 @@ public class RatCode : MonoBehaviour
     public AIPath RatPathfinding; //Imported from A*
     public AIDestinationSetter RatDestination; //Imported from A*
 
-    private void Start()
+    private void Awake()
     {
         Player = GameObject.Find("Player").transform;
         Target = GameObject.Find("Rat Target").transform;
@@ -48,10 +48,11 @@ public class RatCode : MonoBehaviour
 
         
         //If player gets to close to rat - run away
-        if (DistanceToPlayer.magnitude < 1)
+        if (DistanceToPlayer.magnitude < 1.25f)
         {
             RatDestination.target = Target;
             RatPathfinding.maxSpeed = 1.55f;
+            AttackState = false;
         }
 
         if (DistanceToTarget.magnitude < 0.15f)

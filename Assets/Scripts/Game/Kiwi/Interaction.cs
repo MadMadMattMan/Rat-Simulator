@@ -101,7 +101,7 @@ public class Interaction : MonoBehaviour
             {
                 if (Inventory.inventory[0] == 0)
                 {
-                    Debug.Log("Item1 Slot Empty");
+                    ToolTips.StartQuickMessage("Item slot empty");
                 } //If inventory Empty
                 else if (Inventory.inventory[0] == 1)
                 {
@@ -124,37 +124,33 @@ public class Interaction : MonoBehaviour
             {
                 if (Inventory.inventory[1] == 0)
                 {
-                    Debug.Log("Item2 Slot Empty");
-                }
-                else
+                    ToolTips.StartQuickMessage("Item slot empty");
+                } //If inventory Empty
+                else if (Inventory.inventory[1] == 1)
                 {
-                    if (Inventory.inventory[1] == 0)
-                    {
-                        Debug.Log("Item1 Slot Empty");
-                    } //If inventory Empty
-                    else if (Inventory.inventory[1] == 1)
-                    {
-                        EggHealthSystem.HealerStatic = 25;
-                        Inventory.RemoveItem(1);
-                    } //If item is healer
-                    else if (Inventory.inventory[1] == 2)
-                    {
-                        Debug.Log("Cannot Use item on Egg");
-                        ToolTips.StartQuickMessage("Can't use item on egg");
-                    }
-                    else if (Inventory.inventory[1] == 3)
-                    {
-                        EggHealthSystem.eggStageInt++;
-                        EggHealthSystem.eggStageTextStatic.text = "Stage " + EggHealthSystem.eggStageInt;
-                        Inventory.RemoveItem(1);
-                    } //If item levels up egg
+                    EggHealthSystem.HealerStatic = 25;
+                    Inventory.RemoveItem(1);
+                } //If item is healer
+                else if (Inventory.inventory[1] == 2)
+                {
+                    Debug.Log("Cannot Use item on Egg");
+                    ToolTips.StartQuickMessage("Can't use item on egg");
                 }
+                else if (Inventory.inventory[1] == 3)
+                {
+                    EggHealthSystem.eggStageInt++;
+                    EggHealthSystem.eggStageTextStatic.text = "Stage " + EggHealthSystem.eggStageInt;
+                    Inventory.RemoveItem(1);
+                } //If item levels up egg
             }
         }
-
         else if (TriggerInside.name == "Morepork Interact Zone")
         {
-            //
+            Debug.Log("Interacted With Morepork");
+            if (!MoreporkScript.GivenItem)
+                MoreporkScript.MoreporkInteracted();
+            else
+                ToolTips.StartQuickMessage("Morepork doesn't want to talk right now");
         }
 
         //If the player has not recived an item, interact with the penguin and if the player has recived an item, don't and tell player that
@@ -176,7 +172,7 @@ public class Interaction : MonoBehaviour
             {
                 if (Inventory.inventory[0] == 0)
                 {
-                    Debug.Log("Item1 Slot Empty");
+                    ToolTips.StartQuickMessage("Item slot empty");
                 } //If inventory Empty
                 else if (Inventory.inventory[0] == 1)
                 {
@@ -193,7 +189,7 @@ public class Interaction : MonoBehaviour
             {
                 if (Inventory.inventory[1] == 0)
                 {
-                    Debug.Log("Item1 Slot Empty");
+                    ToolTips.StartQuickMessage("Item slot empty");
                 } //If inventory Empty
                 else if (Inventory.inventory[1] == 1)
                 {
@@ -210,9 +206,42 @@ public class Interaction : MonoBehaviour
 
         if (type == "Morepork")
         {
-
+            if (SelectedItem == 1)
+            {
+                if (Inventory.inventory[0] == 0)
+                {
+                    ToolTips.StartQuickMessage("Item slot empty");
+                } //If inventory Empty
+                else if (Inventory.inventory[0] == 1)
+                {
+                    MoreporkScript.GaveFood();
+                    Inventory.RemoveItem(0);
+                } //If item is healer
+                else if (Inventory.inventory[0] == 2 | Inventory.inventory[0] == 3)
+                {
+                    Debug.Log("Cannot Use item on Egg");
+                    ToolTips.StartQuickMessage("Morepork doesn't need this");
+                }
+            }
+            else if (SelectedItem == 2)
+            {
+                if (Inventory.inventory[1] == 0)
+                {
+                    ToolTips.StartQuickMessage("Item slot empty");
+                } //If inventory Empty
+                else if (Inventory.inventory[1] == 1)
+                {
+                    MoreporkScript.GaveFood();
+                    Inventory.RemoveItem(1);
+                } //If item is healer
+                else if (Inventory.inventory[1] == 2 | Inventory.inventory[1] == 3)
+                {
+                    Debug.Log("Cannot Use item on Egg");
+                    ToolTips.StartQuickMessage("Morepork doesn't need this");
+                }
+            }
         }
-        
+
     }
 
     public void ItemSelector(string Direction)
