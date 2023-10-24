@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlsScript : MonoBehaviour
+public class Controls_Script : MonoBehaviour
 {
 
     public GameObject ControllerImage;
