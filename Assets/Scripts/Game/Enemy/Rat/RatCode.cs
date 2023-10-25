@@ -20,19 +20,23 @@ public class RatCode : MonoBehaviour
 
     private void Awake()
     {
+        //Sets variables on cloneing
         Player = GameObject.Find("Player").transform;
         Target = GameObject.Find("Rat Target").transform;
         Attack = GameObject.Find("Rat Attack").transform;
 
+        //Resets bool
         AttackState = false;
 
+        //Checks if player is close to rat on spawn and if so delete the rat
         Vector3 DistanceToPlayer = transform.position - Player.position;
 
         if (DistanceToPlayer.magnitude < 2.5f)
         {
+            RatSpawnCode.RatClone = null;
             Destroy(gameObject);
         }
-        else
+        else //else begin pathfinding to hideout hole
         {
             RatDestination.target = Attack;
             RatPathfinding.maxSpeed = 1;
@@ -53,14 +57,16 @@ public class RatCode : MonoBehaviour
             RatDestination.target = Target;
             RatPathfinding.maxSpeed = 1.55f;
             AttackState = false;
+            gameObject.GetComponent<AudioSource>().Stop();
         }
 
         if (DistanceToTarget.magnitude < 0.15f)
         {
+            RatSpawnCode.RatClone = null;
             Destroy(gameObject);
         }
 
-        if (DistanceToAttack.magnitude < 0.05f)
+        if (DistanceToAttack.magnitude < 0.10f && !AttackState)
         {
             IsAttacking();
         }
@@ -69,5 +75,6 @@ public class RatCode : MonoBehaviour
     public void IsAttacking()
     {
         AttackState = true;
+        gameObject.GetComponent<AudioSource>().Play();
     }
 }

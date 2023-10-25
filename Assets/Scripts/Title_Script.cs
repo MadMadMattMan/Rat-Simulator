@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Title_Script : MonoBehaviour
 {
+    //Resets time if game was pasued
     public void Awake()
     {
         Time.timeScale = 1.0f;
     }
+
+    //just button code
 
     public void StartGame()
     {

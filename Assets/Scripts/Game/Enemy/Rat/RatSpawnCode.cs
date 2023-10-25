@@ -9,6 +9,10 @@ public class RatSpawnCode : MonoBehaviour
 
     public int TestTime;
 
+    public bool Spawning;
+
+    public static GameObject RatClone;
+
     private void Start()
     {
         EvilRatPrefab = EvilRat;
@@ -21,15 +25,21 @@ public class RatSpawnCode : MonoBehaviour
     //Delays the rats spawn for 'Time' amount of time and then spawns one
     public IEnumerator RatSpawnDelay(int Time)
     {
+        Spawning = true;
         //Debug.Log("SpawnDelay Iniciated");
         yield return new WaitForSeconds(Time);
-        Instantiate(EvilRatPrefab);
+        RatClone = Instantiate(EvilRatPrefab);
         //Debug.Log("Rat Spawned");
+        Spawning = false;
     }
 
     private void Update()
     {
-        //Search the scene to see if there is a rat spawned and if ratdelaycoroutine is not enabled
-        //Start RatSpawnDelay
+
+        if (RatClone == null && !Spawning)
+        {
+            StopAllCoroutines();
+            StartCoroutine(RatSpawnDelay(Random.Range(60, 100)));
+        }
     }
 }

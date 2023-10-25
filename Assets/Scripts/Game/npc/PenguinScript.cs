@@ -7,7 +7,7 @@ public class PenguinScript : MonoBehaviour
 {
     public TextMeshPro PenguinTextSetter;
     public static TextMeshPro PenguinText;
-    public GameObject SafeZone;
+    public Animator PenguinAnimator;
 
     public Transform ItemSpawner;
 
@@ -15,6 +15,7 @@ public class PenguinScript : MonoBehaviour
 
     public static bool GivenItem = false;
 
+    //Sets up penguin
     private void Start()
     {
         PenguinText = PenguinTextSetter;
@@ -36,6 +37,8 @@ public class PenguinScript : MonoBehaviour
         }
     }
 
+    //Section for animations and after trade code
+
     static bool GaveFoodBool = false;   
 
     //If give food is true, stop the quickmessage and play the coroutine
@@ -47,10 +50,12 @@ public class PenguinScript : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(GaveFoodBool);
+        //Debug.Log(GaveFoodBool);
 
+        //converts static bool into a local one that can start a coroutine
         if (GaveFoodBool == true)
         {
+            //Stops all corutines in this script to prevent overlap
             StopAllCoroutines();
             StartCoroutine(PenguinFetchAnimation());
             GaveFoodBool = false;
@@ -61,9 +66,11 @@ public class PenguinScript : MonoBehaviour
     IEnumerator PenguinFetchAnimation()
     {
         GivenItem = true;
-        //Debug.Log("StartedFetch");
+        PenguinAnimator.SetTrigger("Animation Trigger");
         PenguinText.text = "Thanks. BRB.";
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(20);
+        PenguinAnimator.SetTrigger("Animation Trigger");
+        yield return new WaitForSeconds(2);
         PenguinText.text = "Here you go.";
         //Debug.Log("Waited and Spawned");
         Instantiate(LevelUpPrefab, ItemSpawner.position, ItemSpawner.rotation);

@@ -10,6 +10,7 @@ public class ShopMenuScript : MonoBehaviour
     public GameObject shopMenu;
     public static GameObject shopMenuStatic;
 
+    //item stock setter
     public static int FoodStock;
     public static int LevelStock;
 
@@ -18,16 +19,31 @@ public class ShopMenuScript : MonoBehaviour
     public TextMeshProUGUI LevelNumber;
     public static TextMeshProUGUI LevelNumberStatic;
 
+    //button text setting
+    public TextMeshProUGUI Slot1ButtonText;
+    public static TextMeshProUGUI Slot1ButtonTextStatic;
+    public TextMeshProUGUI Slot2ButtonText;
+    public static TextMeshProUGUI Slot2ButtonTextStatic;
+
+    //Sets up items for the game
     private void Awake()
     {
         shopMenuStatic = shopMenu;
         shopMenuStatic.SetActive(false);
-        FoodStock = 5;
+
+        FoodStock = 8;
         FoodNumberStatic = FoodNumber;
+        FoodNumberStatic.text = FoodStock.ToString();
+
         LevelStock = 2;
         LevelNumberStatic = LevelNumber;
+        LevelNumberStatic.text = LevelStock.ToString();
+
+        Slot1ButtonTextStatic = Slot1ButtonText;
+        Slot2ButtonTextStatic = Slot2ButtonText;
     }
 
+    //Code that toggles shop opening, targetstate sting programmable to force open or force close shop
     public static void OpenCloseShop(string targetState)
     {
         //if specifically stated to close menu, close it. else toggle menu
@@ -47,8 +63,10 @@ public class ShopMenuScript : MonoBehaviour
         }
     }
 
+    //Button code with int set in button editor for what slot has been clicked
     public static void PurchaseItem(int Item)
     {
+        //If item is one, food item, and stock not empty, buy it by replacing shiny thing with the item
         if (Item == 1 && FoodStock > 0 && Inventory.inventory.Contains(2))
         {
             FoodStock--;
@@ -63,6 +81,7 @@ public class ShopMenuScript : MonoBehaviour
                 }
             }
         }
+        //Same as above for item 2
         else if (Item == 2 && LevelStock > 0 && Inventory.inventory.Contains(2))
         {
             LevelStock--;
@@ -77,10 +96,26 @@ public class ShopMenuScript : MonoBehaviour
                 }
             }
         }
+        //Informs the player that item is out of stock
         else
         {
-            Debug.LogError("Invalid Item Purchased");
+            ToolTips.StartQuickMessage("Item out of stock");
+        }
+
+        //sets visuals for out of stock for both items
+        if (FoodStock == 0)
+        {
+            FoodNumberStatic.text = "0";
+            FoodNumberStatic.color = Color.red;
+            Slot1ButtonTextStatic.text = "out of stock";
+            Slot1ButtonTextStatic.color = Color.red;
+        }
+        if (LevelStock == 0)
+        {
+            LevelNumberStatic.text = "0";
+            LevelNumberStatic.color = Color.red;
+            Slot2ButtonTextStatic.text = "out of stock";
+            Slot2ButtonTextStatic.color = Color.red;
         }
     }
-
 }
