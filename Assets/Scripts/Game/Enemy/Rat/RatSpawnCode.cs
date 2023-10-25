@@ -16,8 +16,8 @@ public class RatSpawnCode : MonoBehaviour
     private void Start()
     {
         EvilRatPrefab = EvilRat;
-        //int WaitTime = Random.Range(20, 50);
-        int WaitTime = TestTime;
+        int WaitTime = Random.Range(20, 50);
+        //int WaitTime = TestTime;
         //Debug.Log("Start Iniciated");
         StartCoroutine(RatSpawnDelay(WaitTime));
     }

@@ -55,6 +55,7 @@ public class EggHealthSystem : MonoBehaviour
 
         eggStageText.text = eggStageTextStatic.text;
 
+		//sets egg image to reflect egg health
         if (hitPoint >= 90 )
 		{
 			egg.sprite = eggStages[0];
