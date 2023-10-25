@@ -13,8 +13,10 @@ public class RatSpawnCode : MonoBehaviour
 
     public static GameObject RatClone;
 
-    private void Start()
+    private void Awake()
     {
+        StopAllCoroutines();
+        RatCode.AttackState = false;
         EvilRatPrefab = EvilRat;
         int WaitTime = Random.Range(20, 50);
         //int WaitTime = TestTime;

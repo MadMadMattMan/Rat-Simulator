@@ -58,11 +58,12 @@ public class HeartSystemManager : MonoBehaviour
         {
             ClampHealth();
         }
-        health = currenthealth;
+        currenthealth = health;
 
         if (health == 0)
         {
             Debug.Log("Game over");
+            GameOverviewer.GameOver = true;
             GameStateMaster = false;
         }
     }

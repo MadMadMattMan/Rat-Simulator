@@ -35,8 +35,8 @@ public class GameOverviewer : MonoBehaviour
         }
     }
 
-    public void ReturnToMenu()
+    public void Exit()
     {
-        SceneManager.LoadScene("Title Scene");
+        Application.Quit();
     }
 }

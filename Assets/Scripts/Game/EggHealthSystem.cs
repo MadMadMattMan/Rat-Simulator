@@ -44,6 +44,11 @@ public class EggHealthSystem : MonoBehaviour
 		{
 			UpdateHealthBar();
 		}
+
+		if (eggStageText.text == "Stage 5")
+		{
+			GameOverviewer.GameWon = true;
+		}
     }
 
     //Updates helath bar and text
@@ -121,6 +126,7 @@ public class EggHealthSystem : MonoBehaviour
 	IEnumerator PlayerDied()
 	{
 		Debug.Log("Egg died - Game Over");
+		GameOverviewer.GameOver = true;
 		HeartSystemManager.GameStateMaster = false;
 
 		yield return null;
