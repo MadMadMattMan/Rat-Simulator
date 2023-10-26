@@ -10,6 +10,7 @@ public class StoatCode : MonoBehaviour
     public Transform Player;
     public Transform RoamPos;
     public static Transform Stoat;
+    public AudioSource PlayerHurtSFX;
 
     public float StoatRoam = 0.25f;
     public float StoatChase = 0.75f;
@@ -99,6 +100,10 @@ public class StoatCode : MonoBehaviour
         {
             HeartSystemManager.health -= 1;
             StartCoroutine(AttackPause());
+
+            //Plays a sound too alert the player
+            PlayerHurtSFX.Stop();
+            PlayerHurtSFX.Play();
         }        
     }
 

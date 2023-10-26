@@ -49,7 +49,11 @@ public class Kiwi_Movement2 : MonoBehaviour
         //sprint mechanic if shift is held
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Sprint = 3;
+            Sprint = 4;
+        }
+        else
+        {
+            Sprint = 2;
         }
 
         //moves the player along the X axis in relation to Horizontal Movement Axis, excludes movement if below controller dead zone
