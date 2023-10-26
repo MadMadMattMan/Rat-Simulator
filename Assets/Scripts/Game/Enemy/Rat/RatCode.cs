@@ -55,7 +55,7 @@ public class RatCode : MonoBehaviour
         if (DistanceToPlayer.magnitude < 1.25f)
         {
             RatDestination.target = Target;
-            RatPathfinding.maxSpeed = 1.55f;
+            RatPathfinding.maxSpeed = 2.75f;
             AttackState = false;
             gameObject.GetComponent<AudioSource>().Stop();
         }
