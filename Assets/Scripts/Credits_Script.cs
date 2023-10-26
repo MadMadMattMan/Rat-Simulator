@@ -16,4 +16,9 @@ public class Credits_Script : MonoBehaviour
     {
         SceneManager.LoadScene("Title Scene");
     }
+
+    public void OpenHowToPlay()
+    {
+        SceneManager.LoadScene("How To Play");
+    }
 }

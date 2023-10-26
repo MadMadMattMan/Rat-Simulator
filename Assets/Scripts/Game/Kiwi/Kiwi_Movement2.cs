@@ -26,6 +26,8 @@ public class Kiwi_Movement2 : MonoBehaviour
 
     public ControllerInputSystem ControllerSupport;
     public Toggle ControllerMode;
+    private int Sprint;
+    private bool Sprintbool;
 
     public AudioSource PlayerWalkSFX;
 
@@ -44,12 +46,10 @@ public class Kiwi_Movement2 : MonoBehaviour
         InputX = Input.GetAxis("Horizontal");
         InputY = Input.GetAxis("Vertical");
 
-        int Sprint = 1;
-
         //sprint mechanic if shift is held
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Sprint = 5;
+            Sprint = 3;
         }
 
         //moves the player along the X axis in relation to Horizontal Movement Axis, excludes movement if below controller dead zone

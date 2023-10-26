@@ -125,6 +125,15 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""e3ead5a7-02b8-4f05-a11c-fdaf17eb2f21"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -270,6 +279,17 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                     ""action"": ""Pickup"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45df5cfd-b25b-4604-92a4-628afd2bc9b8"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -289,6 +309,7 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
         m_Controller_ItemSelectionRight = m_Controller.FindAction("ItemSelectionRight", throwIfNotFound: true);
         m_Controller_DropItem = m_Controller.FindAction("DropItem", throwIfNotFound: true);
         m_Controller_Pickup = m_Controller.FindAction("Pickup", throwIfNotFound: true);
+        m_Controller_Sprint = m_Controller.FindAction("Sprint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +380,7 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
     private readonly InputAction m_Controller_ItemSelectionRight;
     private readonly InputAction m_Controller_DropItem;
     private readonly InputAction m_Controller_Pickup;
+    private readonly InputAction m_Controller_Sprint;
     public struct ControllerActions
     {
         private @ControllerInputSystem m_Wrapper;
@@ -374,6 +396,7 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
         public InputAction @ItemSelectionRight => m_Wrapper.m_Controller_ItemSelectionRight;
         public InputAction @DropItem => m_Wrapper.m_Controller_DropItem;
         public InputAction @Pickup => m_Wrapper.m_Controller_Pickup;
+        public InputAction @Sprint => m_Wrapper.m_Controller_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Controller; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -416,6 +439,9 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                 @Pickup.started -= m_Wrapper.m_ControllerActionsCallbackInterface.OnPickup;
                 @Pickup.performed -= m_Wrapper.m_ControllerActionsCallbackInterface.OnPickup;
                 @Pickup.canceled -= m_Wrapper.m_ControllerActionsCallbackInterface.OnPickup;
+                @Sprint.started -= m_Wrapper.m_ControllerActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_ControllerActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_ControllerActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_ControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -453,6 +479,9 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
                 @Pickup.started += instance.OnPickup;
                 @Pickup.performed += instance.OnPickup;
                 @Pickup.canceled += instance.OnPickup;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -470,5 +499,6 @@ public partial class @ControllerInputSystem : IInputActionCollection2, IDisposab
         void OnItemSelectionRight(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
 }
