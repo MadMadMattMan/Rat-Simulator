@@ -67,14 +67,14 @@ public class PenguinScript : MonoBehaviour
     {
         GivenItem = true;
         PenguinAnimator.SetTrigger("Animation Trigger");
-        PenguinText.text = "Thanks. BRB.";
+        PenguinText.text = "Thanks. Wait here.";
         yield return new WaitForSeconds(20);
         PenguinAnimator.SetTrigger("Animation Trigger");
         yield return new WaitForSeconds(2);
         PenguinText.text = "Here you go.";
         //Debug.Log("Waited and Spawned");
         Instantiate(LevelUpPrefab, ItemSpawner.position, ItemSpawner.rotation);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2);
         PenguinText.gameObject.SetActive(false);
     }
 }

@@ -11,6 +11,7 @@ public class GameOverviewer : MonoBehaviour
     public GameObject GameOverPanel;
     public GameObject GameWinPanel;
 
+    //Sets game so that player has not lost nor won yet
     private void Start()
     {
         GameOver = false;
@@ -20,6 +21,7 @@ public class GameOverviewer : MonoBehaviour
         GameWinPanel.SetActive(false);
     }
 
+    //Checks for game loss or win
     void Update()
     {
         if (GameOver)
@@ -35,6 +37,7 @@ public class GameOverviewer : MonoBehaviour
         }
     }
 
+    //Button code that closes the game
     public void Exit()
     {
         Application.Quit();

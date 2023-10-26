@@ -30,21 +30,26 @@ public class EggHealthSystem : MonoBehaviour
 
     private void FixedUpdate()
     {
+		//If rat is atacking and game is not paused, damage the egg
         if (RatCode.AttackState && Time.timeScale == 1)
 		{
 			Attacked(0.005f);
 		}
 
+		//Checks if player is healing egg and heals the egg for that amount
 		if (HealerStatic != 0)
 		{
 			Heal(HealerStatic);
+			//resets heal amount
 			HealerStatic = 0;
 		}
+		//If the egg stage text does not match the text, update the healthbar and text
 		if (eggStageText.text != eggStageTextStatic.text)
 		{
 			UpdateHealthBar();
 		}
 
+		//checks if game has been won yet
 		if (eggStageText.text == "Stage 5")
 		{
 			GameOverviewer.GameWon = true;
@@ -54,10 +59,14 @@ public class EggHealthSystem : MonoBehaviour
     //Updates helath bar and text
     private void UpdateHealthBar()
 	{
+		//Converts eggpercent number into a decimal with max of 1 and min of 0
 		float healthpercent = hitPoint / 100;
+		//Calculates the width needed for the healthbar and sets it so that is displays the correct fill percentage of the egg health bar
 		currentHealthBar.rectTransform.localPosition = new Vector3(currentHealthBar.rectTransform.rect.width * healthpercent - currentHealthBar.rectTransform.rect.width, 0, 0);
+		//Sets the text to show the percentage value as a whole number out of 100
 		healthText.text = hitPoint.ToString ("0") + "/" + maxHitPoint.ToString ("0");
 
+		//Updates the egg stage text to match the global value
         eggStageText.text = eggStageTextStatic.text;
 
 		//sets egg image to reflect egg health
@@ -87,15 +96,19 @@ public class EggHealthSystem : MonoBehaviour
         }
     }
 
-
+	//When void is called, remove designated health
 	public void Attacked(float Damage)
 	{
 		hitPoint -= Damage;
+
+		//If health value is less than one set health to zero
 		if (hitPoint < 1)
 			hitPoint = 0;
 
+		//Call update void
         UpdateHealthBar();
 
+		//check if player is dead
 		StartCoroutine(TakeDamage());
 	}
 

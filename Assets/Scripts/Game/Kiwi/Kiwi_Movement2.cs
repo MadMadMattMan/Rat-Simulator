@@ -262,5 +262,10 @@ public class Kiwi_Movement2 : MonoBehaviour
         {
             PlayerWalkSFX.Stop();
         }
+
+        if (GameOverviewer.GameOver || GameOverviewer.GameOver)
+        {
+            gameObject.GetComponent<AudioSource>().Stop();
+        }
     }
 }

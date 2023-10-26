@@ -244,6 +244,7 @@ public class Interaction : MonoBehaviour
 
     }
 
+    //Cycles the highlighted inventory slot with controls, controller and keyboard
     public void ItemSelector(string Direction)
     {
         if (Direction == "Left")
@@ -266,6 +267,7 @@ public class Interaction : MonoBehaviour
         }
     }
 
+    //Updates the visuals of highlighted inventory slot
     private void UpdateVisuals()
     {
         if (SelectedItem == 1)
@@ -274,8 +276,10 @@ public class Interaction : MonoBehaviour
             Highlight.position = HighlightDefault.position;
     } 
 
+    //Dops the item that is in selected item slot at the players location
     public void DropItem()
     {
+        //Cycles through item types and finds the seclected item, drops that one
         for (int i = 1; i <= 3; i++)
         {
             if (Inventory.inventory[SelectedItem - 1] == i)

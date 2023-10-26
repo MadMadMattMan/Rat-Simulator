@@ -11,8 +11,8 @@ public class Title_Script : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    //just button code
 
+    //just button code
     public void StartGame()
     {
         SceneManager.LoadScene("Game Scene");

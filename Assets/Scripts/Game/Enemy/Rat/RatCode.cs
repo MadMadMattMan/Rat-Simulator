@@ -70,6 +70,10 @@ public class RatCode : MonoBehaviour
         {
             IsAttacking();
         }
+        if (GameOverviewer.GameOver || GameOverviewer.GameOver)
+        {
+            gameObject.GetComponent<AudioSource>().Stop();
+        }
     }
 
     public void IsAttacking()

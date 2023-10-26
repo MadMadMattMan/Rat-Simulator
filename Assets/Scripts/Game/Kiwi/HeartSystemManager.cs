@@ -32,18 +32,22 @@ public class HeartSystemManager : MonoBehaviour
     public float MaxHealth { get { return maxHealth; } }
     public float MaxTotalHealth { get { return maxTotalHealth; } }
 
+
+    //Heals player by value
     public void Heal(float healed)
     {
         health += healed;
         ClampHealth();
     }
 
+    //Hurts player by value
     public void TakeDamage(float dmg)
     {
         health -= dmg;
         ClampHealth();
     }
 
+    //Sets defaults on scene opening
     public void Awake()
     {
         maxHealth = 3;
@@ -54,12 +58,14 @@ public class HeartSystemManager : MonoBehaviour
 
     public void FixedUpdate()
     {
+        //If visable is not the same as current health, update visuals and make them the same
         if (currenthealth != health)
         {
             ClampHealth();
         }
         currenthealth = health;
 
+        //Checks if player is dead
         if (health == 0)
         {
             Debug.Log("Game over");
@@ -68,6 +74,7 @@ public class HeartSystemManager : MonoBehaviour
         }
     }
 
+    //Checks that health can't go above max health
     public void AddHealth()
     {
         if (maxHealth < maxTotalHealth)
@@ -80,6 +87,7 @@ public class HeartSystemManager : MonoBehaviour
         }   
     }
 
+    //Updates visuals of hearts
     void ClampHealth()
     {
         health = Mathf.Clamp(health, 0, maxHealth);

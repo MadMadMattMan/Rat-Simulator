@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Credits_Script : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //Resets time
     void Start()
     {
         Time.timeScale = 1.0f;
     }
 
+    //button code that changes scene
     public void OpenTitle()
     {
         SceneManager.LoadScene("Title Scene");

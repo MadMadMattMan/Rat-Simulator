@@ -14,6 +14,8 @@ public class MoreporkScript : MonoBehaviour
 
     public static bool GivenItem = false;
 
+    public Animator MoreporkAnimator;
+
     private void Start()
     {
         MoreporkText = MoreporkTextSetter;
@@ -61,12 +63,15 @@ public class MoreporkScript : MonoBehaviour
     {
         GivenItem = true;
         //Debug.Log("StartedFetch");
-        MoreporkText.text = "Thanks. BRB.";
-        yield return new WaitForSeconds(4);
+        MoreporkText.text = "Thanks. Wait here.";
+        MoreporkAnimator.SetTrigger("Triggerer");
+        yield return new WaitForSeconds(15);
+        MoreporkAnimator.SetTrigger("Triggerer");
+        yield return new WaitForSeconds(3.5f);
         MoreporkText.text = "Here you go.";
         //Debug.Log("Waited and Spawned");
         Instantiate(LevelUpPrefab, ItemSpawner.position, ItemSpawner.rotation);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2);
         MoreporkText.gameObject.SetActive(false);
     }
 }

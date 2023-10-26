@@ -94,17 +94,19 @@ public class ToolTips : MonoBehaviour
     }
 
 
-    ///ALL FOR QUICK MESSAGE SYSTEM <summary>
+    ///ALL FOR QUICK MESSAGE SYSTEM
 
     public static string QuickMessageTxt;
     public static bool StartQuickMessageBool;
 
+    //When void is called from another script, set string value to the msg attached. Set the bool to true to start quick message
     public static void StartQuickMessage(string msg)
     {
         QuickMessageTxt = msg;
         StartQuickMessageBool = true;
     }
 
+    //Check if Startmessage bool is true and start quickmessage while setting the message of the Quick Message and then toggles the bool to false
     private void Update()
     {
         if (StartQuickMessageBool)
@@ -116,8 +118,10 @@ public class ToolTips : MonoBehaviour
 
     private void SetQuickMessage()
     {
+        //Filters out if the message is null
         if (QuickMessageTxt != null)
         {
+            //Stops all Coroutines and starts a new one with the latest quickmessagetext to stop glitchy overlaps
             StopAllCoroutines();
             StartCoroutine(QuickMessage(QuickMessageTxt));
         }
@@ -125,14 +129,19 @@ public class ToolTips : MonoBehaviour
 
     public IEnumerator QuickMessage(string msg)
     {
+        //Gets current text string and if the gameObject is active and stores it in variables
         string CurrentText = StaticText.text;
         bool CurrentState = StaticText.gameObject.activeSelf;
+
+        //Sets current text to desired message text and makes the text gameobject visable
         StaticText.text = msg;
         StaticText.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
+        //After waiting for 2 seconds, reset text to what is was before and to the
         StaticText.text = CurrentText;
         if (!CurrentState)
             StaticText.gameObject.SetActive(false);
+        //removes quick message text
         QuickMessageTxt = null;
     }
 }

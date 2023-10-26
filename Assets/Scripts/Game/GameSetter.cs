@@ -11,15 +11,11 @@ public class GameSetter : MonoBehaviour
 
     public float TimeScale;
 
+    //Sets game scene aspects to default - light and time
     private void Awake()
     {
         HeartSystemManager.GameStateMaster = true;
         GlobalLight.GetComponent<Light2D>().intensity = GlobalLightIntensity;
         TimeScale = 1;
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GlobalLight.GetComponent<Light2D>().intensity = GlobalDaylight;
-        }
     }
 }

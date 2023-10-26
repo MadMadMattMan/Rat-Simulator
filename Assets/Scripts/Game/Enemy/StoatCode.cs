@@ -20,8 +20,6 @@ public class StoatCode : MonoBehaviour
     public AIPath StoatPathfinding; //Imported from A*
     public AIDestinationSetter StoatDestination; //Imported from A*
 
-    public static bool InPenguinTP = false;
-
     private void Awake()
     {
         StoatState = "idle";
@@ -65,6 +63,11 @@ public class StoatCode : MonoBehaviour
         else
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        if (GameOverviewer.GameOver ||  GameOverviewer.GameOver)
+        {
+            gameObject.GetComponent<AudioSource>().Stop();
         }
     }
 
