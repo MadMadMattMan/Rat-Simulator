@@ -27,4 +27,9 @@ public class Title_Script : MonoBehaviour
     {
         SceneManager.LoadScene("Tutorial");
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
